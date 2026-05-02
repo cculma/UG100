@@ -24,11 +24,11 @@ UG100 present challenges regarding homopolymers and a rigorous quality control i
 |    | Mean/Total       | 300.2     | 31.4   | 82.6      | 93.7     | 3152679241618 | 10503849297 | 10.50         |
 |    | Official_output* | 300       |        | >85%      | >85%     |               |             | 10-12**       |
 
-* Official output was obtained from <https://genomics.umn.edu/service/ug-100-sequencing> \
+\* Official output was obtained from <https://genomics.umn.edu/service/ug-100-sequencing> \
 ** Wafer contains 11 samples
 
 Sample S18-NGX will be aligned to the RegenSY27x genome. This genome is phased and contains 32 linkage groups (LG), representing eight chromosomes across four monoploid genomes. Given a genome size of 653 Mb for Hap_01, the coverage is $455\times$. For the full phased genome (32 LG) of 2.59 Gb, the coverage is $114\times$.
- 
+
 | chrom                        | Chrom | Hap_1     | Hap_2     | Hap_3     | Hap_4      |
 |------------------------------|-------|-----------|-----------|-----------|------------|
 | medsa.RegenSY27x.gnm1.Chr1.1 | 1     | 85129743  | 87534413  | 86698797  | 81593309   |
@@ -42,7 +42,7 @@ Sample S18-NGX will be aligned to the RegenSY27x genome. This genome is phased a
 | Sub-Total                    |       | 653415314 | 625696371 | 648084291 | 667322748  |
 | Total                        |       |           |           |           | 2594518724 |
 
-### Two approaches will be tested:
+### Two approaches will be tested
 
 1. Alignment to Hap_1 only.
 
@@ -50,27 +50,30 @@ Sample S18-NGX will be aligned to the RegenSY27x genome. This genome is phased a
 
 Prior to genome indexing, 2,902 scaffolds (totaling 691,555,158 bp) will be removed. The monoploid version of the genome was generated using `samtools`:
 
-`samtools faidx all.haps.rename.fasta \`
-`medsa.RegenSY27x.gnm1.Chr1.1 \`
-`medsa.RegenSY27x.gnm1.Chr2.1 \`
-`medsa.RegenSY27x.gnm1.Chr3.1 \`
-`medsa.RegenSY27x.gnm1.Chr4.1 \`
-`medsa.RegenSY27x.gnm1.Chr5.1 \`
-`medsa.RegenSY27x.gnm1.Chr6.1 \`
-`medsa.RegenSY27x.gnm1.Chr7.1 \`
-`medsa.RegenSY27x.gnm1.Chr8.1 \`
+`samtools faidx all.haps.rename.fasta` \
+`medsa.RegenSY27x.gnm1.Chr1.1` \
+`medsa.RegenSY27x.gnm1.Chr2.1` \
+`medsa.RegenSY27x.gnm1.Chr3.1` \
+`medsa.RegenSY27x.gnm1.Chr4.1` \
+`medsa.RegenSY27x.gnm1.Chr5.1` \
+`medsa.RegenSY27x.gnm1.Chr6.1` \
+`medsa.RegenSY27x.gnm1.Chr7.1` \
+`medsa.RegenSY27x.gnm1.Chr8.1` \
 `> haplo_01.fa`
 
 ### Data Locations (MSI)
 
-`CRAM=/common/surfs/curti242/umgc/2025-q3/421685-20250723_2054/Curtin_Project_004_Pool_2/421685-S18-NGX-Z0018-CATGCGTCCTGTGAT.cram`
-`GENOME=/projects/standard/curti242/shared/ASSEMBLIES/ALFALFA-ASSEMBLIES/REGENSY27x/all.haps.rename.fasta`
+[//]: # (`CRAM=/common/surfs/curti242/umgc/2025-q3/421685-20250723_2054/Curtin_Project_004_Pool_2/421685-S18-NGX-Z0018-CATGCGTCCTGTGAT.cram`
+`GENOME=/projects/standard/curti242/shared/ASSEMBLIES/ALFALFA-ASSEMBLIES/REGENSY27x/all.haps.rename.fasta`)
 
-The files were downloaded and were uploaded to SCinet Ceres: `/projects/xu_alfalfabreeding/system_from_home/msi/UG100/` and the new files will be generated in `/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/`
+The files were downloaded from MSI and uploaded to SCinet Ceres:
+
+[//]: # (`/projects/xu_alfalfabreeding/system_from_home/msi/UG100/` and the new files will be generated in `/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/`)
 
 ### Pipeline
 
 The genotype S18-NGX was sequenced using the UG100 platform. The analysis pipeline follows these steps:
+
 1. CRAM to BAM conversion (Reference-oriented Alignment Map to Binary Alignment Map).
 2. Alignment to the reference genome.
 3. Duplicate marking
@@ -80,9 +83,10 @@ The genotype S18-NGX was sequenced using the UG100 platform. The analysis pipeli
 Although standard software like `samtools` or `bwa` can be used, the best choice is to use the official Ultima Genomics (UG) repositories. These include the Ultima Aligner (UA) and flow-optimized DeepVariant models, which are specifically tuned for Ultima flow-based chemistry and are not available in standard toolkits.
 
 The UG Docker registry contains several repositories <https://hub.docker.com/u/ultimagenomics> and the project follows these specific workflows:
+
 * <https://github.com/Ultimagen/healthomics-workflows/blob/main/workflows/trim_align_sort/howto-custom-reference-genome.md>
 * <https://github.com/Ultimagen/healthomics-workflows/blob/main/workflows/trim_align_sort/howto-ua-align-sort.md>
 
-Progress: The reference genome was indexed successfully. Steps 1.1 (UA indexing), 1.2 (UA build) and 2 (UA aligment) were run succefully. 
+Progress: The reference genome was indexed successfully. Steps 1.1 (UA indexing), 1.2 (UA build) and 2 (UA aligment) were run succefully.
 
-Task for the next week: I need to solve a problem hardware compatibility with gpu. GPU will be required in the step 4 (Varaint calling). Ceres cluster does not have GPUs, but Atlas does it. Consequently, all data generated on Ceres must be synchronized to Atlas via Globus. Furthermore, the Apptainer images derived from <https://hub.docker.com/u/ultimagenomics> are not functioning correctly on the Atlas cluster; I will write to SCinet to solve it. 
+Task for the next week: I need to solve a problem with GPU hardware compatibility. GPU will be required in the step 4 (Varaint calling with DeepVariant). Ceres cluster does not have GPUs, but Atlas does it. Therefore, all data generated on Ceres must be synchronized to Atlas via Globus. Furthermore, the Apptainer images from <https://hub.docker.com/u/ultimagenomics> are not functioning correctly on the Atlas cluster; I will write to SCinet to solve it.
