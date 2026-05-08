@@ -90,3 +90,21 @@ The UG Docker registry contains several repositories <https://hub.docker.com/u/u
 Progress: The reference genome was indexed successfully. Steps 1.1 (UA indexing), 1.2 (UA build) and 2 (UA aligment) were run succefully.
 
 Task for the next week: I need to solve a problem with GPU hardware compatibility. GPU will be required in the step 4 (Varaint calling with DeepVariant). Ceres cluster does not have GPUs, but Atlas does it. Therefore, all data generated on Ceres must be synchronized to Atlas via Globus. Furthermore, the Apptainer images from <https://hub.docker.com/u/ultimagenomics> are not functioning correctly on the Atlas cluster; I will write to SCinet to solve it.
+
+## progress 2026-05-08
+
+The pipeline for triming and sorting was corrected and now works ok: the script is [04_pipeline_works.sh](https://github.com/cculma/UG100/blob/main/05_UG_scripts/04_pipeline_works.sh). This pipeline is composed of three steps:
+
+1. Reference indexing
+2. Align with UA
+3. Sort UA Aligned BAM with Demux and Sorter
+
+The output files of interest are: \
+`output_basename.cram` \
+`output_basename.cram.crai`
+
+The next steps are: \
+4. Prepare Reference for Variant Calling <https://github.com/Ultimagen/healthomics-workflows/blob/main/workflows/efficient_dv/howto-custom-reference-genome.md> \
+5. Variant calling <https://github.com/Ultimagen/healthomics-workflows/blob/main/workflows/efficient_dv/howto-germline-calling-efficient-dv.md>
+
+The expected output is a gVCF with both variant and non-variant sites alligned to the monoploid reference genome. 

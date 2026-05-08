@@ -9,15 +9,12 @@ BIND_PATH="/project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts"
 
 # Step 1: Indexing
 # UA indexing is slow and creates a ~50GB .uai file
-# works ok
 apptainer run alignment.sif ua --build=true --ref $REF --index $REF.uai
 
-# work ok
 apptainer run alignment.sif ua --build --ref $REF --index  $REF.uai --progress
 
 # Step 2 : Align with UA
 # When working with a single input BAM/CRAM file
-# work ok
 samtools view -h -@ 32 $INPUT_CRAM -T $REF -F 2048 | \
 apptainer run alignment.sif ua \
     --index $REF.uai \
@@ -34,7 +31,6 @@ samtools view -@ 32 -o $OUT_DIR/output_basename.bam -
 # Step 3 : Sort UA Aligned BAM with Demux and Sorter
 # The 'demux' tool prepares the BAM for the sorter. 
 # Use --channel-id=0 to prevent the 'fail to scan' error you encountered.
-# work ok
 samtools view -h -@ 32 $OUT_DIR/output_basename.bam | \
 apptainer run sorter.sif demux \
     --input=- \

@@ -1,5 +1,6 @@
-
 # notes of comands used
+
+## this a draft file to keep record of the commands tested
 1  101 1050
 2 1101 2050
 3 2101 3050
@@ -44,22 +45,16 @@ GENOME=/project/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_
 
 
 
-
 421685-S18-NGX-Z0018-CATGCGTCCTGTGAT.cram.aligned_raw.bam
-
-
-
 421685-S18-NGX-Z0018-CATGCGTCCTGTGAT.cram
 
 
-
 /project/xu_alfalfabreeding/system_from_home/msi/Silphium/scripts01
-
 $TMPDIR
 
 
 
-2026/04/30
+## Date 2026/04/30
 
 
 
