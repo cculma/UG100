@@ -586,3 +586,29 @@ demux \
     --output-group=output_basename \
     --output-path={outputGroup}/{outputGroup} \
     --align=true
+
+## Output Structure
+
+After running sorter, the output will be organized as follows:
+
+sorter_output/
+    output_basename-000/  # timestamp is appended to the run ID
+        output_basename/output_basename.cram  # Main output CRAM file
+        output_basename/output_basename.cram.crai  # Index file
+        output_basename/output_basename.csv  # Statistics in CSV format
+        output_basename/output_basename.json  # Statistics in JSON format
+
+
+/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/
+
+/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_basename-000
+/output_basename/ 
+run_SecondaryAnalysis.txt 
+run_VariantCalling.txt
+
+/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_basename-000/output_basename
+output_basename_0.bedGraph.gz 
+output_basename_1.bedGraph.gz 
+output_basename.cram 
+output_basename.cram.crai 
+output_basename.json
