@@ -155,7 +155,6 @@ mkdir -p "${OUTPUT_DIR}"
 
 
 module load apptainer
-
 apptainer inspect --runscript deepvariant_1.10.0.sif
 
 
@@ -417,7 +416,6 @@ sudo docker run --gpus 1 \
   /opt/deepvariant/bin/run_deepvariant \
   ...
 
-
 # Run DeepVariant with "--cleanenv"
 
 singularity run  --gpus 1 --cleanenv -B /usr/lib/locale/:/usr/lib/locale/ \
@@ -561,3 +559,15 @@ output_basename_1.bedGraph.gz
 output_basename.cram 
 output_basename.cram.crai 
 output_basename.json
+
+## progress on 2026/05/11
+
+salloc -A xu_alfalfabreeding
+module load apptainer
+
+module load samtools
+samtools faidx haplo_01.fa
+samtools dict haplo_01.fa >  haplo_01.fa.dict
+
+/project/xu_alfalfabreeding/system_from_home/msi/UG100/03_pipeline/
+/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/
