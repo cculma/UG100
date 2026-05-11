@@ -108,3 +108,17 @@ The next steps are: \
 5. Variant calling <https://github.com/Ultimagen/healthomics-workflows/blob/main/workflows/efficient_dv/howto-germline-calling-efficient-dv.md>
 
 The expected output is a gVCF with both variant and non-variant sites alligned to the monoploid reference genome. 
+
+### Input files for calling variants
+
+The workflow takes three major inputs:
+
+1. Reads aligned to a reference genome, sorted and duplicate-marked, stored in CRAM format, and indexed with CRAI. The output files of interest are (done): \
+`output_basename.cram` \
+`output_basename.cram.crai`
+2. Reference genome files (done): \
+`haplo_01.fa` \
+`haplo_01.fa.fai` \
+`haplo_01.fa.dict` \
+`haplo_01.interval_list` \
+3. A model checkpoint in ONNX format. **where to get it?**
