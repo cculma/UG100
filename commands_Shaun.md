@@ -569,5 +569,75 @@ module load samtools
 samtools faidx haplo_01.fa
 samtools dict haplo_01.fa >  haplo_01.fa.dict
 
-/project/xu_alfalfabreeding/system_from_home/msi/UG100/03_pipeline/
+/project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts/
 /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/
+/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/
+
+Find the ONNX 
+
+                            gs://concordanz/deepvariant/model/germline/v1.14/germline-ramp-8128462_shuffle_300K_ckpt_260000.onnx
+
+s3://ultimagen-workflow-resources-us-east-1/deepvariant/model/germline/v1.14/germline-ramp-8128462_shuffle_300K_ckpt_260000.onnx
+
+### to locate ONNX file
+### does not work
+apptainer run call_variants.sif ls -R /model/germline/v1.14/
+
+apptainer run call_variants.sif ls -R /deepvariant
+
+apptainer run -t -i call_variants.sif /bin/bash
+apptainer run -it call_variants.sif bash
+
+apptainer shell docker:call_variants.sif
+
+
+apptainer shell docker://ultimagenomics/call_variants:latest
+apptainer exec docker://ultimagenomics/call_variants:latest ls -la /deepvariant
+apptainer run call_variants.sif ls -la /deepvariant
+
+apptainer inspect --env call_variants.sif
+apptainer inspect --list-apps call_variants.sif
+apptainer inspect --all call_variants.sif
+
+${OUT_DIR}/${REF%.fa}.interval_list 
+OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2"
+
+
+java -jar picard.jar BedToIntervalList \
+      I=input.bed \
+      O=list.interval_list \
+      SD=reference_sequence.dict
+
+PICARD=picard/3.0.0
+
+module load picard/2.26.2
+
+java -jar $PICARD_JAR SortSam
+
+java -jar $PICARD_JAR  \
+    -I ${FAI} \
+    -O ${OUT_DIR}/${REF}.interval_list \
+    -SD ${DIC}
+
+picard BedToIntervalList
+
+vim $(which picard)
+
+
+apptainer exec ug_gatk_picard.sif picard BedToIntervalList
+
+java -Xmx4g -XX:ParallelGCThreads=5 -jar $PICARDJARPATH/picard.jar command
+
+java -jar $PICARDJARPATH/picard.jar SortSam
+java -jar $PICARD SortSam
+java -jar $PICARD_JAR SortSam
+ 
+$PICARD or $PICARD_JAR
+Error: Unable to access jarfile /picard.jar
+
+### find where is picard
+module show picard
+java -jar /software/el9/apps/picard/3.0.0/picard.jar -h
+
+### fai to bed 
+awk 'BEGIN {FS="\t"}; {print $1 FS "0" FS $2}' haplo_01.fa.fai > haplo_01.fa.bed

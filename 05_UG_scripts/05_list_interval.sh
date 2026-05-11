@@ -41,3 +41,10 @@ apptainer run alignment.sif \
 # to locate ONNX file
 # does not work
 # apptainer run call_variants.sif ls -R /models/efficient_dv
+
+REF="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_04/haplo_01_04.fa"
+
+samtools faidx $REF
+samtools dict $REF -o ${REF%.fa}.dict
+
+awk 'BEGIN {FS="\t"}; {print $1 FS "0" FS $2}' $fasta.fai > $fasta.bed
