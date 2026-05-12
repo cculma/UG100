@@ -695,5 +695,92 @@ temp_0001_of_40
 
 temp_0040_of_40
 
-scattered.interval_list > interval0002_of_40.bed
-cat scattered.interval_list | grep -v @ | awk 'BEGIN{OFS="\t"}{print $1,$2-1,$3}' > ../../out_bed/interval0002_of_40.bed
+#!/bin/bash
+
+cd out01
+for i in *
+do
+
+j=${i#*_}
+
+cd ${i}
+cat scattered.interval_list | grep -v @ | awk 'BEGIN{OFS="\t"}{print $1,$2-1,$3}' > ../../out_bed/interval_${j}.bed
+cd ../
+
+done
+
+
+OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/08_make_examples"
+
+for i in /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/out_bed/*.bed
+do
+
+p=${i%%.bed}
+
+done
+
+
+#!/bin/bash
+
+
+
+REF="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa"
+OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/08_make_examples"
+BIND_PATH="/project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts"
+CRAM="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_basename-000/output_basename/output_basename.cram"
+CRAI="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_basename-000/output_basename/output_basename.cram.crai"
+
+for i in /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/out_bed/*.bed
+do
+
+p=${i%%.bed}
+temp=${p#interval}
+result=${temp%_of*}
+
+apptainer run make_examples.sif tool \
+  --input ${CRAM} \
+  --cram-index ${CRAI} \
+  --bed ${i} \
+  --output ${OUT_DIR}/${result} \
+  --reference ${REF} \
+  --min-base-quality 5 \
+  --min-mapq 5 \
+  --cgp-min-count-snps 2 \
+  --cgp-min-count-hmer-indels 2 \
+  --cgp-min-count-non-hmer-indels 2 \
+  --cgp-min-fraction-snps 0.12 \
+  --cgp-min-fraction-hmer-indels 0.12 \
+  --cgp-min-fraction-non-hmer-indels 0.06 \
+  --cgp-min-mapping-quality 5 \
+  --max-reads-per-region 1500 \
+  --assembly-min-base-quality 0 \
+  --optimal-coverages 50 \
+  --add-ins-size-channel
+
+
+done
+
+BED_INTERVAL="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/out/temp_0002_of_40/interval0002_of_40.bed"
+
+apptainer run make_examples.sif tool \
+  --input ${CRAM} \
+  --cram-index ${CRAI} \
+  --bed ${i} \
+  --output ${OUT_DIR}/${p} \
+  --reference ${REF} \
+  --min-base-quality 5 \
+  --min-mapq 5 \
+  --cgp-min-count-snps 2 \
+  --cgp-min-count-hmer-indels 2 \
+  --cgp-min-count-non-hmer-indels 2 \
+  --cgp-min-fraction-snps 0.12 \
+  --cgp-min-fraction-hmer-indels 0.12 \
+  --cgp-min-fraction-non-hmer-indels 0.06 \
+  --cgp-min-mapping-quality 5 \
+  --max-reads-per-region 1500 \
+  --assembly-min-base-quality 0 \
+  --optimal-coverages 50 \
+  --add-ins-size-channel
+
+
+ /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/08_make_examples//90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/out_bed/interval0001.tfrecordWARNING: SINGULARITY_TMPDIR and APPTAINER_TMPDIR have different values, using the latter
