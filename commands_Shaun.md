@@ -640,10 +640,12 @@ BIND_PATH="/project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts"
 CRAM="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_basename-000/output_basename/output_basename.cram"
 CRAI="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_basename-000/output_basename/output_basename.cram.crai"
 
+apptainer run make_examples.sif tool --help
+
 apptainer run make_examples.sif tool \
   --input ${CRAM} \
   --cram-index ${CRAI} \
-  --bed ${BED_INTERVAL} \  
+  --bed ${BED_INTERVAL} \
   --output ${OUT_DIR}/001 \
   --reference ${REF} \
   --min-base-quality 5 \
@@ -684,3 +686,14 @@ apptainer run make_examples.sif tool \
 #        I=input.bam \
 #        O=collect_wgs_metrics.txt \
 #        R=reference_sequence.fasta
+
+/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/out/
+
+for i in 0001 to 0040
+
+temp_0001_of_40
+
+temp_0040_of_40
+
+scattered.interval_list > interval0002_of_40.bed
+cat scattered.interval_list | grep -v @ | awk 'BEGIN{OFS="\t"}{print $1,$2-1,$3}' > ../../out_bed/interval0002_of_40.bed
