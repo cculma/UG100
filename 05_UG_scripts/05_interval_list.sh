@@ -18,35 +18,36 @@ PICARD="/software/el9/apps/picard/3.0.0/picard.jar"
 module load apptainer
 module load gatk
 module load picard
+module load samtools
+
+REF="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_04/haplo_01_04.fa"
+samtools faidx $REF
+samtools dict $REF -o ${REF%.fa}.dict
+awk 'BEGIN {FS="\t"}; {print $1 FS "0" FS $2}' $fasta.fai > $fasta.bed
 
 # works ok
-#samtools faidx $REF
-#samtools dict $REF -o ${REF%.fa}.dict
-awk 'BEGIN {FS="\t"}; {print $1 FS "0" FS $2}' ${REF}.fai > ${REF}.bed
 java -jar $PICARD BedToIntervalList \
     -I ${BED} \
     -O ${REF%.fa}.interval_list \
     -SD ${DIC}
 
-# 3. Ultima-Specific Filtering Files
-# not tested. I cannot find the step to use them.
-apptainer run alignment.sif \
-    ua-tools map28 \
-    --reference $REF \
-    --output ${REF%.fa}.map28.vcf.gz
+# next step is run script 05.1_interval_bed.sh
 
-apptainer run alignment.sif \
-    ua-tools CalculateGcContent \
-    --input $REF \
-    --output ${REF%.fa}.gc_profile.vcf.gz
+# 3. Ultima-Specific Filtering Files
+# non tested. I cannot find the step to use them.
+#apptainer run alignment.sif \
+#    ua-tools map28 \
+#    --reference $REF \
+#    --output ${REF%.fa}.map28.vcf.gz
+
+# non tested
+#apptainer run alignment.sif \
+#    ua-tools CalculateGcContent \
+#    --input $REF \
+#    --output ${REF%.fa}.gc_profile.vcf.gz
 
 # to locate ONNX file
 # does not work
 # apptainer run call_variants.sif ls -R /models/efficient_dv
+# non tested
 
-REF="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_04/haplo_01_04.fa"
-
-samtools faidx $REF
-samtools dict $REF -o ${REF%.fa}.dict
-
-awk 'BEGIN {FS="\t"}; {print $1 FS "0" FS $2}' $fasta.fai > $fasta.bed
