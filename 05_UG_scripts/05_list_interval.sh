@@ -7,6 +7,7 @@ OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo
 BIND_PATH="/project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts"
 FAI="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa.fai"
 DIC="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa.dict"
+PICARD="/software/el9/apps/picard/3.0.0/picard.jar"
 
 # 1. Reference Preparation for Variant Calling
 # .fai and .dict
@@ -19,12 +20,13 @@ module load gatk
 module load picard
 
 # works ok
-apptainer run ug_gatk_picard.sif \
-    picard BedToIntervalList \
-    -I ${FAI} \
-    -O ${OUT_DIR}/${REF%.fa}.interval_list \
+#samtools faidx $REF
+#samtools dict $REF -o ${REF%.fa}.dict
+awk 'BEGIN {FS="\t"}; {print $1 FS "0" FS $2}' ${REF}.fai > ${REF}.bed
+java -jar $PICARD BedToIntervalList \
+    -I ${BED} \
+    -O ${REF%.fa}.interval_list \
     -SD ${DIC}
-
 
 # 3. Ultima-Specific Filtering Files
 # not tested. I cannot find the step to use them.

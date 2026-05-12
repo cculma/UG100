@@ -29,21 +29,6 @@ module load samtools
 
 ./01_cram_fastq.sh
 
-stdout.20618664.ceres25-compute-5
-
-
-ERROR! Unable to open the file: /project/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01/haplo_01.fa.bwt.2bit.64
-
-
-
-GENOME=/project/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01/haplo_01.fa
-
-
-
-GENOME=/project/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa
-
-
-
 
 421685-S18-NGX-Z0018-CATGCGTCCTGTGAT.cram.aligned_raw.bam
 421685-S18-NGX-Z0018-CATGCGTCCTGTGAT.cram
@@ -52,14 +37,10 @@ GENOME=/project/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_
 /project/xu_alfalfabreeding/system_from_home/msi/Silphium/scripts01
 $TMPDIR
 
-
-
-## Date 2026/04/30
-
+## Progress 2026-04-30
 
 
 /project/xu_alfalfabreeding/system_from_home/msi/UG100/02_files
-
 
 
 cp -r haplo_01_mem2 ../../../../../../90daydata/xu_alfalfabreeding/system_from_home/msi/
@@ -72,14 +53,10 @@ cp -r 03_pipeline ../../../../../../90daydata/xu_alfalfabreeding/system_from_hom
 
 cd ../../../../../../90daydata/xu_alfalfabreeding/system_from_home/msi/
 
-
-
 /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files
 
 
-
 CRAM=/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/421685-S18-NGX-Z0018-CATGCGTCCTGTGAT.cram
-
 GENOME=/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa
 
 
@@ -287,27 +264,16 @@ apptainer run --cleanenv -B /usr/lib/locale/:/usr/lib/locale/ \
 
 
 #apptainer run -B /usr/lib/locale/:/usr/lib/locale/ \\
-
 #  docker://google/deepvariant:"${BIN_VERSION}" \\
-
 #  /opt/deepvariant/bin/run_deepvariant \\
-
 #  --model_type=WGS \\ \*\*Replace this string with exactly one of the following \[WGS,WES,PACBIO,ONT_R104,HYBRID_PACBIO_ILLUMINA]\*\*
-
 #  --vcf_stats_report=true \\
-
 #  --ref="${INPUT_DIR}"/ucsc.hg19.chr20.unittest.fasta \\
-
 #  --reads="${INPUT_DIR}"/NA12878_S1.chr20.10_10p1mb.bam \\
-
 #  --regions "chr20:10,000,000-10,010,000" \\
-
 #  --output_vcf="${OUTPUT_DIR}"/output.vcf.gz \\
-
 #  --output_gvcf="${OUTPUT_DIR}"/output.g.vcf.gz \\
-
 #  --intermediate_results_dir "${OUTPUT_DIR}/intermediate_results_dir" \\ \*\*Optional.
-
 #  --num_shards=1 \\ \*\*How many cores the `make_examples` step uses. Change it to the number of CPU cores you have.\*\*
 
 
@@ -317,20 +283,12 @@ INPUT_DIR="${PWD}/quickstart-testdata"
 "${INPUT_DIR}"/ucsc.hg19.chr20.unittest.fasta
 
 
-
 /project/xu_alfalfabreeding/system_from_home/msi/UG100/03_pipeline/quickstart-testdata
-
 /project/xu_alfalfabreeding/system_from_home/msi/UG100/03_pipeline/quickstart-output
-
 quickstart-testdata
-
 quickstart-output
 
-
-
 # --model_type: <WGS|WES|PACBIO|ONT_R104|HYBRID_PACBIO_ILLUMINA|MASSEQ|RNASEQ>
-
-
 
 \--model_type: <WGS|WES|PACBIO|ONT_R104|HYBRID_PACBIO_ILLUMINA|MASSEQ|RNASEQ>: Required. Type of model to use for variant calling. Set this flag to use the default model
 
@@ -621,12 +579,9 @@ java -jar $PICARD_JAR  \
 
 picard BedToIntervalList
 
-vim $(which picard)
-
 
 apptainer exec ug_gatk_picard.sif picard BedToIntervalList
 
-java -Xmx4g -XX:ParallelGCThreads=5 -jar $PICARDJARPATH/picard.jar command
 
 java -jar $PICARDJARPATH/picard.jar SortSam
 java -jar $PICARD SortSam
@@ -641,3 +596,34 @@ java -jar /software/el9/apps/picard/3.0.0/picard.jar -h
 
 ### fai to bed 
 awk 'BEGIN {FS="\t"}; {print $1 FS "0" FS $2}' haplo_01.fa.fai > haplo_01.fa.bed
+
+
+
+
+### interval list to bed
+
+REF="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa"
+PICARD="/software/el9/apps/picard/3.0.0/picard.jar"
+
+java -jar $PICARD IntervalListTools \
+  SCATTER_COUNT=40 \
+  SUBDIVISION_MODE=BALANCING_WITHOUT_INTERVAL_SUBDIVISION_WITH_OVERFLOW \
+  UNIQUE=true \
+  SORT=true \
+  BREAK_BANDS_AT_MULTIPLES_OF=100000 \
+  INPUT=${REF%.fa}.interval_list \
+  OUTPUT=out
+
+cat interval001.interval_list | grep -v @ | awk 'BEGIN{OFS="\t"}{print $1,$2-1,$3}' > interval001.bed
+
+Cannot read non-existent file: file:///90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.interval_list
+
+cat: /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/interval001.interval_list: No such file or directory
+
+
+/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/out/temp_0001_of_40
+
+scattered.interval_list
+
+cat scattered.interval_list | grep -v @ | awk 'BEGIN{OFS="\t"}{print $1,$2-1,$3}' > interval0002_of_40.bed
+

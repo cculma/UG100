@@ -122,3 +122,13 @@ The workflow takes three major inputs:
 `haplo_01.fa.dict` \
 `haplo_01.interval_list` \
 3. A model checkpoint in ONNX format. **where to get it?**
+
+
+### Workflow details
+
+The workflow is composed of three steps: 
+
+1. make_examples
+2. call_variants
+3. post_process
+
