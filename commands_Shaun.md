@@ -439,6 +439,8 @@ SAMPLE_NAME="Sample01"
 
  $REF.uai
 
+ultimagenomics/make_examples
+apptainer pull make_examples.sif docker://ultimagenomics/make_examples:latest
 
 /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa.uai
 
@@ -597,9 +599,6 @@ java -jar /software/el9/apps/picard/3.0.0/picard.jar -h
 ### fai to bed 
 awk 'BEGIN {FS="\t"}; {print $1 FS "0" FS $2}' haplo_01.fa.fai > haplo_01.fa.bed
 
-
-
-
 ### interval list to bed
 
 REF="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa"
@@ -627,3 +626,61 @@ scattered.interval_list
 
 cat scattered.interval_list | grep -v @ | awk 'BEGIN{OFS="\t"}{print $1,$2-1,$3}' > interval0002_of_40.bed
 
+
+
+### make_examples
+
+#!/bin/bash
+# Define Paths
+BED_INTERVAL="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/out/temp_0002_of_40/interval0002_of_40.bed"
+REF="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa"
+INDEX="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa.uai"
+OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/07_make_examples"
+BIND_PATH="/project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts"
+CRAM="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_basename-000/output_basename/output_basename.cram"
+CRAI="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_basename-000/output_basename/output_basename.cram.crai"
+
+apptainer run make_examples.sif tool \
+  --input ${CRAM} \
+  --cram-index ${CRAI} \
+  --bed ${BED_INTERVAL} \  
+  --output ${OUT_DIR}/001 \
+  --reference ${REF} \
+  --min-base-quality 5 \
+  --min-mapq 5 \
+  --cgp-min-count-snps 2 \
+  --cgp-min-count-hmer-indels 2 \
+  --cgp-min-count-non-hmer-indels 2 \
+  --cgp-min-fraction-snps 0.12 \
+  --cgp-min-fraction-hmer-indels 0.12 \
+  --cgp-min-fraction-non-hmer-indels 0.06 \
+  --cgp-min-mapping-quality 5 \
+  --max-reads-per-region 1500 \
+  --assembly-min-base-quality 0 \
+  --optimal-coverages 50 \
+  --median-coverage <median_coverage> \
+  --add-ins-size-channel
+
+# Step 3 : Sort UA Aligned BAM with Demux and Sorter
+# ALIGNED="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_basename.bam"
+#work ok
+#samtools view -h -@ 32 $OUT_DIR/output_basename.bam | \
+#apptainer run sorter.sif demux \
+#    --input=- \
+#    --output-dir=$OUT_DIR/ \
+#    --runid=output_basename \
+#    --nthreads 32 \
+#    --progress \
+#    --reference ${REF} \
+#    --mark-duplicates=true \
+#    --output-group=output_basename \
+#    --output-path={outputGroup}/{outputGroup} \
+#    --align=true \
+#    --progress \
+#    --cram-ignore-md5 \
+#    --channel-id 0
+
+# java -jar picard.jar CollectWgsMetrics \
+#        I=input.bam \
+#        O=collect_wgs_metrics.txt \
+#        R=reference_sequence.fasta
