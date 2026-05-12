@@ -132,3 +132,9 @@ The workflow is composed of three steps:
 2. call_variants
 3. post_process
 
+During the step make_examples there is necesary to generate an `${REF%.fa}.interval_list` file with the script [05_interval_list.sh](https://github.com/cculma/UG100/blob/main/05_UG_scripts/05_interval_list.sh). The output of this script will be required for the next step during the make_examples step.
+
+The script [05.1_interval_bed.sh](https://github.com/cculma/UG100/blob/main/05_UG_scripts/05.1_interval_bed.sh) create a $N$ interval list with function `IntervalListTools ` from `PICARD` and convert the interval list files into `.bed`. 
+
+The last step for make_examples is to run the script [06_make.sh](https://github.com/cculma/UG100/blob/main/05_UG_scripts/06_make.sh). This script is a foor loop to  run `make_examples.sif` for each `.bed` file generated from `05.1_interval_bed.sh`.
+
