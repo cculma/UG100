@@ -138,4 +138,14 @@ The script [05.1_interval_bed.sh](https://github.com/cculma/UG100/blob/main/05_U
 
 The last step for make_examples is to run the script [06_make.sh](https://github.com/cculma/UG100/blob/main/05_UG_scripts/06_make.sh). This script is a foor loop to  run `make_examples.sif` for each `.bed` file generated from `05.1_interval_bed.sh`.
 
-Move files from Ceres to Atlas
+### Running call_variants
+
+To run call_variants, the tfrecord files were moved from ceres to atlas as well as the files `params.ini` and the batch script to run it `07_call_variants.sh`
+
+The batch script requered to be modified because it contains contains DOS line breaks. `tr -d '\r' < 07_call_variants.sh > 08_call_variants.sh`.
+
+Now the job was submited to atlas to run asking a gpu-a100 for 72:00:00.
+
+### Giraffe
+
+For the next step the goal is to repeat the process but using the phased genome. 

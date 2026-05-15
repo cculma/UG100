@@ -793,13 +793,13 @@ CRAI="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_
 
 # Always good practice to reset environment when you start
 module purge
-module load apptainer/1.1.9
+module load apptainer/1.4.3
 
 # apptainer run call_variants.sif --param params.ini
 srun apptainer exec --nv call_variants.sif --param params.ini
 srun apptainer exec
-
-
+apptainer run call_variants.sif --help
+apptainer exec call_variants.sif --help
 
 # ceres
 my_quotas 
@@ -825,3 +825,39 @@ Atlas working project space
 
 
 my_quotas /project/xu_alfalfabreeding/system_from_home/msi/UG100
+/project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts
+/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/08_make_examples/0001.tfrecord
+
+
+
+                                                                                                                
+#!/bin/bash
+#SBATCH --job-name="UG01"   #name of this job
+#SBATCH -N 1
+#SBATCH --partition=gpu-a100
+#SBATCH --qos=normal
+#SBATCH --account=xu_alfalfabreeding
+#SBATCH --mail-user=cesar.medinaculma@ars.usda.gov
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --time=48:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH -o "%j.out"
+#SBATCH -e "%j.err"
+#SBATCH --gres=gpu:a100_1g.10gb:1
+
+[cesar.medinaculma@atlas-login-2 05_UG_scripts]$ sbatch 07_call_variants.sh 
+sbatch: error: Batch script contains DOS line breaks (\r\n)
+sbatch: error: instead of expected UNIX line breaks (\n).
+sed -i 's/\r$//'07_call_variants.sh
+tr -d '\r' < 07_call_variants.sh > 08_call_variants.sh
+
+
+sbatch: error: E.g.: #SBATCH --gres=gpu:<type>:<number-of-GPUS> 
+
+#SBATCH --gres=gpu:a100_1g.10gb:4
+#SBATCH --time=72:00:00
+#SBATCH --partition=gpu-a100
+#SBATCH --nodes=1
+#SBATCH --gres=gpu:1
+#SBATCH --ntasks=16
