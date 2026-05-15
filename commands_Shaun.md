@@ -65,11 +65,9 @@ ls /reference/containers
 ## Sentieon® Genomics is a commercial sowtware. The other option os ti use Deep Variant.
 
 
-
 Deep Variant, using Docker
 
 https://scinet.usda.gov/guides/software/singularity
-
 
 
 ## install deepvariant in scinet
@@ -87,7 +85,6 @@ cd # home
 BIN_VERSION="1.10.0"
 
 [user.name@sceres20-compute-44 \~]$ apptainer pull docker://google/deepvariant:"${BIN_VERSION}"
-
 
 
 df -h \~
@@ -128,12 +125,8 @@ OUTPUT_DIR="${PWD}/quickstart-output"
 mkdir -p "${OUTPUT_DIR}"
 
 
-
-
-
 module load apptainer
 apptainer inspect --runscript deepvariant_1.10.0.sif
-
 
 
 "/opt/deepvariant/bin/run_deepvariant" "--help"
@@ -828,8 +821,6 @@ my_quotas /project/xu_alfalfabreeding/system_from_home/msi/UG100
 /project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts
 /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/08_make_examples/0001.tfrecord
 
-
-
                                                                                                                 
 #!/bin/bash
 #SBATCH --job-name="UG01"   #name of this job
@@ -861,3 +852,33 @@ sbatch: error: E.g.: #SBATCH --gres=gpu:<type>:<number-of-GPUS>
 #SBATCH --nodes=1
 #SBATCH --gres=gpu:1
 #SBATCH --ntasks=16
+
+
+
+
+ERROR call_variants ../cvInferenceMain.cpp:144: Runtime error: parameter exampleFile1 is not defined
+/var/spool/slurmd/job19770911/slurm_script: line 23: 331894 Aborted                 (core dumped) apptainer run --nv call_variants.sif call_variants --param params.ini
+
+parameters file params.ini
+log file ./call_variants_runID_NA_15-05-2026_16:53:23.log
+build version: VERSION
+Runtime error: parameter exampleFile1 is not defined
+
+
+0000000 < Fri May 15 16:53:23 2026 - 0089801 > ~ <DEBUG> :parameters file: params.ini
+0000001 < Fri May 15 16:53:23 2026 - 0089823 > ~ <DEBUG> :log file: ./call_variants_runID_NA_15-05-2026_16:53:23.log
+0000002 < Fri May 15 16:53:23 2026 - 0089830 > ~ <DEBUG> :build version: VERSION
+0000003 < Fri May 15 16:53:23 2026 - 0089845 > ~ <DEBUG> :parameter exampleFile1 is not defined
+call_variants_runID_NA_15-05-2026_16:53:23.log (END)
+
+OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/07_make_examples"
+
+BIND_PATH="/project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts"
+
+apptainer run ${BIND_PATH}/make_examples.sif tool --help
+
+Producing a GVCF file
+Add the arguments --gvcf and --p-error 0.005 to the make_examples step. 
+--gvcf
+--p-error 0.005
+--gzip-output
