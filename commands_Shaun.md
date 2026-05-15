@@ -548,8 +548,6 @@ apptainer run call_variants.sif ls -R /deepvariant
 apptainer run -t -i call_variants.sif /bin/bash
 apptainer run -it call_variants.sif bash
 
-apptainer shell docker:call_variants.sif
-
 
 apptainer shell docker://ultimagenomics/call_variants:latest
 apptainer exec docker://ultimagenomics/call_variants:latest ls -la /deepvariant
@@ -581,9 +579,7 @@ java -jar $PICARD_JAR  \
 
 picard BedToIntervalList
 
-
 apptainer exec ug_gatk_picard.sif picard BedToIntervalList
-
 
 java -jar $PICARDJARPATH/picard.jar SortSam
 java -jar $PICARD SortSam
@@ -631,7 +627,6 @@ cat scattered.interval_list | grep -v @ | awk 'BEGIN{OFS="\t"}{print $1,$2-1,$3}
 ### make_examples
 
 #!/bin/bash
-# Define Paths
 BED_INTERVAL="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/out/temp_0002_of_40/interval0002_of_40.bed"
 REF="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa"
 INDEX="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa.uai"
@@ -689,12 +684,6 @@ apptainer run make_examples.sif tool \
 
 /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/out/
 
-for i in 0001 to 0040
-
-temp_0001_of_40
-
-temp_0040_of_40
-
 #!/bin/bash
 
 cd out01
@@ -711,18 +700,13 @@ done
 
 
 OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/08_make_examples"
-
 for i in /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/out_bed/*.bed
 do
 
 p=${i%%.bed}
-
 done
 
-
 #!/bin/bash
-
-
 
 REF="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa"
 OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/08_make_examples"
