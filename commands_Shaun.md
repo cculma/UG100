@@ -811,13 +811,11 @@ CRAI="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_
 module purge
 module load apptainer/1.1.9
 
-apptainer run call_variants.sif --param params.ini
+# apptainer run call_variants.sif --param params.ini
 srun apptainer exec --nv call_variants.sif --param params.ini
 srun apptainer exec
 
-module purge
-module load apptainer
-srun apptainer exec --nv /apps/containers/pytorch/pytorch-23.04.sif python3 myscript.py
+
 
 # ceres
 my_quotas 
