@@ -801,6 +801,12 @@ apptainer run make_examples.sif tool \
 #SBATCH --ntasks=48
 
 
+REF="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa"
+OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/08_make_examples"
+BIND_PATH="/project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts"
+CRAM="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_basename-000/output_basename/output_basename.cram"
+CRAI="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_basename-000/output_basename/output_basename.cram.crai"
+
 # Always good practice to reset environment when you start
 module purge
 module load apptainer/1.1.9
@@ -812,3 +818,28 @@ srun apptainer exec
 module purge
 module load apptainer
 srun apptainer exec --nv /apps/containers/pytorch/pytorch-23.04.sif python3 myscript.py
+
+# ceres
+my_quotas 
+
+                                         Path  Usage (GB)  Quota (GB)  Availible (GB)  Consumed (%)                                   Status 
+ Ceres Home Directory                                                                                                                        
+                      /home/cesar.medinaculma         4.4        29.8            25.4          14.7                                       OK 
+ Ceres working project storage                                                                                                               
+                  /project/xu_alfalfabreeding      1025.9      1024.0             0.0         100.2  Over quota -  None days to reduce usage 
+ Juno long-term project storage                                                                                                              
+              /LTS/project/xu_alfalfabreeding         0.0      1024.0          1024.0           0.0                                       OK 
+
+# atlas 
+my_quotas 
+Path                                           Usage (GB)       Quota (GB)   Available (GB)       Consumed (%) Status
+                      
+Atlas home directory
+                 /home/cesar.medinaculma               22               30                7                 75 OK
+
+Atlas working project space
+             /project/xu_alfalfabreeding              245             1000              754                 24 OK
+[cesar.medinaculma@atlas-login-1 UG100]$ 
+
+
+my_quotas /project/xu_alfalfabreeding/system_from_home/msi/UG100
