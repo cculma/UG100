@@ -615,8 +615,6 @@ scattered.interval_list
 
 cat scattered.interval_list | grep -v @ | awk 'BEGIN{OFS="\t"}{print $1,$2-1,$3}' > interval0002_of_40.bed
 
-
-
 ### make_examples
 
 #!/bin/bash
@@ -882,3 +880,43 @@ Add the arguments --gvcf and --p-error 0.005 to the make_examples step.
 --gvcf
 --p-error 0.005
 --gzip-output
+
+
+
+## progress on 2026/05/18
+
+## to change bewteen ceres to altlas
+/project/xu_alfalfabreeding/system_from_home/msi/UG100/06_atlas
+
+
+INPUT_CRAM="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/421685-S18-NGX-Z0018-CATGCGTCCTGTGAT.cram"
+REF="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa"
+OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_atlas"
+BIND_PATH="/project/xu_alfalfabreeding/system_from_home/msi/UG100/06_atlas"
+
+
+salloc -A xu_alfalfabreeding
+module load apptainer
+
+
+apptainer run ${BIND_PATH}/make_examples.sif tool \
+  --input ${CRAM} \
+  --cram-index ${CRAI} \
+  --bed ${i} \
+  --output ${OUT_DIR}/${result} \
+  --reference ${REF} \
+  --min-base-quality 5 \
+  --min-mapq 1 \
+--cgp-min-count-snps 2 \
+  --cgp-min-count-hmer-indels 2 \
+  --cgp-min-count-non-hmer-indels 2 \
+  --cgp-min-fraction-snps 0.12 \
+  --cgp-min-fraction-hmer-indels 0.12 \
+  --cgp-min-fraction-non-hmer-indels 0.06 \
+  --cgp-min-mapping-quality 5 \
+  --max-reads-per-region 1500 \
+  --assembly-min-base-quality 0 \
+  --gvcf --p-error 0.005 \
+  --optimal-coverages 50 \
+  --add-ins-size-channel \
+  --gzip-output

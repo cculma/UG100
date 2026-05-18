@@ -12,7 +12,8 @@ OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/08_make_exampl
 # run this script where the out_bed files were generated
 # /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/out_bed
 # for loop to run make_examples.sif for each bed file generated from 05.1_interval_bed.sh
-# option `--median-coverage <median_coverage> \` was not recognized
+# option `--median-coverage <median_coverage> \` was not recognized. It is not present in this version of make_examples.sif
+# GVCF: Add the arguments --gvcf and --p-error 0.005 to the make_examples step. L42
 
 for i in *.bed
 do
@@ -38,6 +39,7 @@ apptainer run ${BIND_PATH}/make_examples.sif tool \
   --cgp-min-mapping-quality 5 \
   --max-reads-per-region 1500 \
   --assembly-min-base-quality 0 \
+  --gvcf --p-error 0.005 --gzip-output \
   --optimal-coverages 50 \
   --add-ins-size-channel
 
