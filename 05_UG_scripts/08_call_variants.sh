@@ -18,7 +18,8 @@ module purge
 module load apptainer/1.4.3
 
 # apptainer run call_variants.sif --param params.ini
-# srun apptainer exec --nv call_variants.sif --param params.ini
+# run from /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/07_make_examples
+# params.ini is also located in this direcotry
 
 BIND_PATH="/project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts"
 
