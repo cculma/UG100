@@ -920,3 +920,34 @@ apptainer run ${BIND_PATH}/make_examples.sif tool \
   --optimal-coverages 50 \
   --add-ins-size-channel \
   --gzip-output
+
+[cesar.medinaculma@atlas-login-1 05_UG_scripts]$ pwd
+/project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts
+cp params.ini /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/07_make_examples/
+cp 08_call_variants.sh /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/07_make_examples/
+
+
+0040.tfrecord.gz
+
+/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/08_make_examples/
+
+
+
+
+:%s#/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/08_make_examples/##g
+
+:%s/tfrecord/.gz&/g
+tfrecord
+.tfrecord.gz
+
+:%s/tfrecord/&.gz/g
+
+ERROR call_variants ../cvInferenceMain.cpp:144: Runtime error: parameter exampleFile1 is not defined
+
+Could not open file s3://ultimagen-workflow-resources-us-east-1/deepvariant/model/germline/v1.14/germline-ramp-8128462_shuffle_300K_ckpt_260000.onnx
+Could not open file s3://ultimagen-workflow-resources-us-east-1/deepvariant/model/germline/v1.14/germline-ramp-8128462_shuffle_300K_ckpt_260000.onnx
+
+
+Could not open file gs://concordanz/deepvariant/model/germline/v1.14/germline-ramp-8128462_shuffle_300K_ckpt_260000.onnx
+
+onnx = /project/xu_alfalfabreeding/system_from_home/msi/UG100/07_model/model.ckpt-890000.dyn_1500.onnx
