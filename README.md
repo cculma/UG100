@@ -123,6 +123,19 @@ The workflow takes three major inputs:
 `haplo_01.interval_list` \
 3. A model checkpoint in ONNX format. **where to get it?**
 
+### Note about the onnx model
+
+Running the `params.ini` it is necessary to get the `onnx` model.
+
+Could not open file gs://concordanz/deepvariant/model/germline/v1.14/germline-ramp-8128462_shuffle_300K_ckpt_260000.onnx
+Following the previous [issue]<https://github.com/Ultimagen/healthomics-workflows/issues/27>, the command to get the model is:
+
+`mkdir model`\
+`aws s3 cp` \
+`s3://ultimagen-workflow-resources-us-east-1/deepvariant/model/germline/v1.3/model.ckpt-890000.dyn_1500.onnx model/` \
+`--no-sign-request` \
+
+aws cli was dowloaded on mac using brew: `brew install awscli`
 
 ### Workflow details
 
