@@ -932,9 +932,7 @@ cp 08_call_variants.sh /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/
 
 /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/08_make_examples/
 
-
-
-
+### vim commnads
 :%s#/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/08_make_examples/##g
 
 :%s/tfrecord/.gz&/g
@@ -949,8 +947,6 @@ Could not open file s3://ultimagen-workflow-resources-us-east-1/deepvariant/mode
 Could not open file s3://ultimagen-workflow-resources-us-east-1/deepvariant/model/germline/v1.14/germline-ramp-8128462_shuffle_300K_ckpt_260000.onnx
 
 Could not open file gs://concordanz/deepvariant/model/germline/v1.14/germline-ramp-8128462_shuffle_300K_ckpt_260000.onnx
-
-onnx = /project/xu_alfalfabreeding/system_from_home/msi/UG100/07_model/model.ckpt-890000.dyn_1500.onnx
 
 onnx = /project/xu_alfalfabreeding/system_from_home/msi/UG100/07_model/model.ckpt-890000.dyn_1500.onnx
 
