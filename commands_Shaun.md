@@ -920,3 +920,13 @@ apptainer run ${BIND_PATH}/make_examples.sif tool \
   --optimal-coverages 50 \
   --add-ins-size-channel \
   --gzip-output
+
+
+I found the onnx file in the [issue]<https://github.com/Ultimagen/healthomics-workflows/issues/27>. 
+
+The command is: 
+mkdir model
+aws s3 cp s3://ultimagen-workflow-resources-us-east-1/deepvariant/model/germline/v1.3/model.ckpt-890000.dyn_1500.onnx model/ --no-sign-request
+
+aws cli was dowloaded in my mac using brew. brew install awscli
+The model was uploaded to box.
