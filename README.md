@@ -153,9 +153,10 @@ The last step for make_examples is to run the script [06_make.sh](https://github
 
 ### Running call_variants
 
-To run call_variants, the tfrecord files were moved from ceres to atlas as well as the files `params.ini` and the batch script to run it `07_call_variants.sh`
+To run call_variants, the tfrecord files were moved from ceres to atlas as well as the files [params.ini]<https://github.com/cculma/UG100/blob/main/05_UG_scripts/params.ini> and the batch script to run it [08_call_variants.sh]<https://github.com/cculma/UG100/blob/main/05_UG_scripts/08_call_variants.sh>
 
-The batch script requered to be modified because it contains contains DOS line breaks. `tr -d '\r' < 07_call_variants.sh > 08_call_variants.sh`.
+The batch script `07_call_variants.sh` requered to be modified because it contains contains DOS line breaks:
+`tr -d '\r' < 07_call_variants.sh > 08_call_variants.sh`
 
 Now the job was submited to atlas to run asking a gpu-a100 for 72:00:00.
 
