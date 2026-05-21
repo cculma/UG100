@@ -947,7 +947,6 @@ ERROR call_variants ../cvInferenceMain.cpp:144: Runtime error: parameter example
 Could not open file s3://ultimagen-workflow-resources-us-east-1/deepvariant/model/germline/v1.14/germline-ramp-8128462_shuffle_300K_ckpt_260000.onnx
 Could not open file s3://ultimagen-workflow-resources-us-east-1/deepvariant/model/germline/v1.14/germline-ramp-8128462_shuffle_300K_ckpt_260000.onnx
 
-
 Could not open file gs://concordanz/deepvariant/model/germline/v1.14/germline-ramp-8128462_shuffle_300K_ckpt_260000.onnx
 
 onnx = /project/xu_alfalfabreeding/system_from_home/msi/UG100/07_model/model.ckpt-890000.dyn_1500.onnx
