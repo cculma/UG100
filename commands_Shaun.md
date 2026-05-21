@@ -921,6 +921,7 @@ apptainer run ${BIND_PATH}/make_examples.sif tool \
   --add-ins-size-channel \
   --gzip-output
 
+<<<<<<< HEAD
 [cesar.medinaculma@atlas-login-1 05_UG_scripts]$ pwd
 /project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts
 cp params.ini /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/07_make_examples/
@@ -950,3 +951,14 @@ Could not open file s3://ultimagen-workflow-resources-us-east-1/deepvariant/mode
 Could not open file gs://concordanz/deepvariant/model/germline/v1.14/germline-ramp-8128462_shuffle_300K_ckpt_260000.onnx
 
 onnx = /project/xu_alfalfabreeding/system_from_home/msi/UG100/07_model/model.ckpt-890000.dyn_1500.onnx
+
+onnx = /project/xu_alfalfabreeding/system_from_home/msi/UG100/07_model/model.ckpt-890000.dyn_1500.onnx
+
+I found the onnx file in the [issue]<https://github.com/Ultimagen/healthomics-workflows/issues/27>. 
+
+The command is: 
+mkdir model
+aws s3 cp s3://ultimagen-workflow-resources-us-east-1/deepvariant/model/germline/v1.3/model.ckpt-890000.dyn_1500.onnx model/ --no-sign-request
+
+aws cli was dowloaded in my mac using brew. brew install awscli
+The model was uploaded to box.
