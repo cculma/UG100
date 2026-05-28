@@ -792,28 +792,6 @@ srun apptainer exec
 apptainer run call_variants.sif --help
 apptainer exec call_variants.sif --help
 
-# ceres
-my_quotas 
-
-                                         Path  Usage (GB)  Quota (GB)  Availible (GB)  Consumed (%)                                   Status 
- Ceres Home Directory                                                                                                                        
-                      /home/cesar.medinaculma         4.4        29.8            25.4          14.7                                       OK 
- Ceres working project storage                                                                                                               
-                  /project/xu_alfalfabreeding      1025.9      1024.0             0.0         100.2  Over quota -  None days to reduce usage 
- Juno long-term project storage                                                                                                              
-              /LTS/project/xu_alfalfabreeding         0.0      1024.0          1024.0           0.0                                       OK 
-
-# atlas 
-my_quotas 
-Path                                           Usage (GB)       Quota (GB)   Available (GB)       Consumed (%) Status
-                      
-Atlas home directory
-                 /home/cesar.medinaculma               22               30                7                 75 OK
-
-Atlas working project space
-             /project/xu_alfalfabreeding              245             1000              754                 24 OK
-[cesar.medinaculma@atlas-login-1 UG100]$ 
-
 
 my_quotas /project/xu_alfalfabreeding/system_from_home/msi/UG100
 /project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts
@@ -965,3 +943,19 @@ The model was uploaded to box.
 [05/21/2026-07:05:05] [W] [TRT] Engine generation failed with backend strategy 3.
 Error message: [optimizer.cpp::computeCosts::3869] Error Code 10: Internal Error (Could not find any implementation for node {ForeignNode[InceptionV3/InceptionV3/Conv2d_1a_3x3/BatchNorm/FusedBatchNormV3__6...InceptionV3/InceptionV3/Conv2d_2b_3x3/Relu]}.).
 Skipping this backend strategy.
+
+
+mkdir out01 && \
+java -jar $PICARD IntervalListTools \
+  SCATTER_COUNT=40 \
+  SUBDIVISION_MODE=INTERVAL_SUBDIVISION \
+  UNIQUE=true \
+  SORT=true \
+  BREAK_BANDS_AT_MULTIPLES_OF=0 \
+  INPUT=haplo_01.interval_list \
+  OUTPUT=out01
+
+
+./05.2_interval_bed.sh: line 27: cd: *: No such file or directory
+./05.2_interval_bed.sh: line 28: ../../out_bed02/interval*.bed: No such file or directory
+cat: scattered.interval_list: No such file or directory
