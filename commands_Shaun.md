@@ -897,7 +897,7 @@ BIND_PATH="/project/xu_alfalfabreeding/system_from_home/msi/UG100/06_atlas"
 
 salloc -A xu_alfalfabreeding
 module load apptainer
-
+vm(INDIV, Ginv1)_
 
 apptainer run ${BIND_PATH}/make_examples.sif tool \
   --input ${CRAM} \
@@ -958,3 +958,10 @@ aws s3 cp s3://ultimagen-workflow-resources-us-east-1/deepvariant/model/germline
 
 aws cli was dowloaded in my mac using brew. brew install awscli
 The model was uploaded to box.
+
+
+
+[05/21/2026-07:02:26] [W] [TRT] onnx2trt_utils.cpp:374: Your ONNX model has been generated with INT64 weights, while TensorRT does not natively support INT64. Attempting to cast down to INT32.
+[05/21/2026-07:05:05] [W] [TRT] Engine generation failed with backend strategy 3.
+Error message: [optimizer.cpp::computeCosts::3869] Error Code 10: Internal Error (Could not find any implementation for node {ForeignNode[InceptionV3/InceptionV3/Conv2d_1a_3x3/BatchNorm/FusedBatchNormV3__6...InceptionV3/InceptionV3/Conv2d_2b_3x3/Relu]}.).
+Skipping this backend strategy.
