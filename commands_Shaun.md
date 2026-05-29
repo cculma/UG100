@@ -526,13 +526,8 @@ samtools dict haplo_01.fa >  haplo_01.fa.dict
 /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/
 /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/
 
-Find the ONNX 
 
-                            gs://concordanz/deepvariant/model/germline/v1.14/germline-ramp-8128462_shuffle_300K_ckpt_260000.onnx
 
-s3://ultimagen-workflow-resources-us-east-1/deepvariant/model/germline/v1.14/germline-ramp-8128462_shuffle_300K_ckpt_260000.onnx
-
-### to locate ONNX file
 ### does not work
 apptainer run call_variants.sif ls -R /model/germline/v1.14/
 
@@ -627,6 +622,8 @@ CRAM="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_
 CRAI="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_basename-000/output_basename/output_basename.cram.crai"
 
 apptainer run make_examples.sif tool --help
+apptainer run ${BIND_PATH}/make_examples.sif tool --help
+
 
 apptainer run make_examples.sif tool \
   --input ${CRAM} \
@@ -899,7 +896,7 @@ apptainer run ${BIND_PATH}/make_examples.sif tool \
   --add-ins-size-channel \
   --gzip-output
 
-<<<<<<< HEAD
+
 [cesar.medinaculma@atlas-login-1 05_UG_scripts]$ pwd
 /project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts
 cp params.ini /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/07_make_examples/
@@ -959,3 +956,5 @@ java -jar $PICARD IntervalListTools \
 ./05.2_interval_bed.sh: line 27: cd: *: No such file or directory
 ./05.2_interval_bed.sh: line 28: ../../out_bed02/interval*.bed: No such file or directory
 cat: scattered.interval_list: No such file or directory
+
+--progress
