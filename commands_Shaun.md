@@ -960,21 +960,34 @@ cat: scattered.interval_list: No such file or directory
 --progress
 
 
-ug_postproc \
-  --infile call_variants.1.gz,call_variants.2.gz,... \
+apptainer run make_examples.sif ug_postproc \
+  --infile call_variants.1.gz,call_variants.2.gz,call_variants.3.gz,call_variants.4.gz \
   --ref Homo_sapiens_assembly38.fasta \
   --outfile output_prefix.vcf.gz \
   --consider_strand_bias \
   --flow_order TGCA \
-  --annotate \
   --bed_annotation_files exome.twist.bed,ug_hcr.bed,... \
   --qual_filter 1 \
-  --filter \
-  --filters_file filters.txt \
-  --dbsnp Homo_sapiens_assembly38.dbsnp138.vcf
+  --gvcf_outfile output_prefix.g.vcf.gz
+  --nonvariant_site_tfrecord_path 
+  0001.gvcf.tfrecord.gz,0002.gvcf.tfrecord.gz,0003.gvcf.tfrecord.gz,0004.gvcf.tfrecord.gz,0005.gvcf.tfrecord.gz,
+  0006.gvcf.tfrecord.gz,0007.gvcf.tfrecord.gz,0008.gvcf.tfrecord.gz,0009.gvcf.tfrecord.gz,0010.gvcf.tfrecord.gz,
+  0011.gvcf.tfrecord.gz,0012.gvcf.tfrecord.gz,0013.gvcf.tfrecord.gz,0014.gvcf.tfrecord.gz,0015.gvcf.tfrecord.gz,
+  0016.gvcf.tfrecord.gz,0017.gvcf.tfrecord.gz,0018.gvcf.tfrecord.gz,0019.gvcf.tfrecord.gz,0020.gvcf.tfrecord.gz,
+  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
+  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
+  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
+  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
+  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
+  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
+  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
+  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
+  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
+  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
 
-  --gvcf_outfile output_prefix.g.vcf.gz gvcf.tfrecord.gz files
-  --nonvariant_site_tfrecord_path
+
+  --vcf_stats_report
+  --use_multiallelic_model
 
   gvcf.tfrecord.gz 
 
@@ -982,3 +995,7 @@ ug_postproc \
 
   --gq-resolution
   --gq-thresholds
+
+
+
+apptainer run make_examples.sif ug_postproc --help
