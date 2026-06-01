@@ -958,3 +958,27 @@ java -jar $PICARD IntervalListTools \
 cat: scattered.interval_list: No such file or directory
 
 --progress
+
+
+ug_postproc \
+  --infile call_variants.1.gz,call_variants.2.gz,... \
+  --ref Homo_sapiens_assembly38.fasta \
+  --outfile output_prefix.vcf.gz \
+  --consider_strand_bias \
+  --flow_order TGCA \
+  --annotate \
+  --bed_annotation_files exome.twist.bed,ug_hcr.bed,... \
+  --qual_filter 1 \
+  --filter \
+  --filters_file filters.txt \
+  --dbsnp Homo_sapiens_assembly38.dbsnp138.vcf
+
+  --gvcf_outfile output_prefix.g.vcf.gz gvcf.tfrecord.gz files
+  --nonvariant_site_tfrecord_path
+
+  gvcf.tfrecord.gz 
+
+  --nonvariant_site_tfrecord_path
+
+  --gq-resolution
+  --gq-thresholds
