@@ -183,20 +183,17 @@ Now the job was submited to atlas to run asking a gpu-a100 for 72:00:00 but the 
 
 ### Postprocess
 
-The last part of the pipeline is to run the post_process step i nthe folder  `06_make_examples`. The output of call_variants will be requered:
-`call_variants.1.gz,call_variants.2.gz,..., call_variants.40.gz`
+The last part of the pipeline was to run the post_process step in the folder `06_make_examples`. This step will require the call_variants output files from `08_call_variants.sh`: `call_variants.1.gz,call_variants.2.gz,..., call_variants.40.gz`. Those files are called from  .txt list: 
 
-Create the files `called_records.txt` and` gvcf_records.txt`
-/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_make_examples
+Create the .txt list of files `called_records.txt` and` gvcf_records.txt`
 
-`called_records=($(ls call_variants.*.gz | sort -V))`
-`printf "%s\n" "${called_records[@]}" > called_records.txt`
+`called_records=($(ls call_variants.*.gz | sort -V))` \
+`printf "%s\n" "${called_records[@]}" > called_records.txt` \
 
-`called_gvcf=($(ls *.gvcf.tfrecord.gz | sort -V))`
-`printf "%s\n" "${called_gvcf[@]}" > gvcf_records.txt`
+`called_gvcf=($(ls *.gvcf.tfrecord.gz | sort -V))` \
+`printf "%s\n" "${called_gvcf[@]}" > gvcf_records.txt` \
 
-The post_process step requires the files [08_postproc.sh](https://github.com/cculma/UG100/blob/main/05_UG_scripts/08_postproc.sh) and the sbatch file [job_08_postproc.sh](https://github.com/cculma/UG100/blob/main/05_UG_scripts/job_08_postproc.sh)
-
+The post_process was run using the [08_postproc.sh](https://github.com/cculma/UG100/blob/main/05_UG_scripts/08_postproc.sh) through the sbatch script [job_08_postproc.sh](https://github.com/cculma/UG100/blob/main/05_UG_scripts/job_08_postproc.sh)
 
 ### Giraffe
 
