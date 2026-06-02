@@ -7,7 +7,7 @@ REF="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_
 BIND_PATH="/project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts"
 CRAM="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_basename-000/output_basename/output_basename.cram"
 CRAI="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_basename-000/output_basename/output_basename.cram.crai"
-OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/08_make_examples"
+OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_make_examples"
 
 # run this script where the out_bed files were generated
 # /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/out_bed02
@@ -41,6 +41,8 @@ apptainer run ${BIND_PATH}/make_examples.sif tool \
   --assembly-min-base-quality 0 \
   --gvcf --p-error 0.005 --gzip-output \
   --optimal-coverages 50 \
+  --progress \
+  --pragmatic \
   --add-ins-size-channel
 
 done
