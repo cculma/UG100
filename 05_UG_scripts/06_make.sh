@@ -10,7 +10,7 @@ CRAI="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_
 OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/08_make_examples"
 
 # run this script where the out_bed files were generated
-# /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/out_bed
+# /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/out_bed02
 # for loop to run make_examples.sif for each bed file generated from 05.1_interval_bed.sh
 # option `--median-coverage <median_coverage> \` was not recognized. It is not present in this version of make_examples.sif
 # GVCF: Add the arguments --gvcf and --p-error 0.005 to the make_examples step. L42
