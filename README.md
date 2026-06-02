@@ -179,7 +179,7 @@ For the next step the goal is to repeat the process but using the phased genome.
 
 ### Postprocess
 
-The last part of the pipeline is to run the post_process step uses the output of call_variants
+The last part of the pipeline is to run the post_process step i nthe folder  `06_make_examples`. The output of call_variants will be requered:
 `call_variants.1.gz,call_variants.2.gz,..., call_variants.40.gz`
 
 Create the files `called_records.txt` and` gvcf_records.txt`
