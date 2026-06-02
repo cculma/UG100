@@ -135,6 +135,15 @@ Following the previous [issue]<https://github.com/Ultimagen/healthomics-workflow
 `s3://ultimagen-workflow-resources-us-east-1/deepvariant/model/germline/v1.3/model.ckpt-890000.dyn_1500.onnx model/` \
 `--no-sign-request` \
 
+the germline onnx file link was found in the efficient dv [template]<https://github.com/Ultimagen/healthomics-workflows/blob/main/workflows/efficient_dv/input_templates/efficient_dv_template-WES-germline-v1_16-ramp.json>
+
+`aws s3 cp` \
+`s3://ultimagen-workflow-resources-us-east-1/deepvariant/model/germline/wes/v1.16/ultimagen-germline-WES-v1.16-ramp.onnx` \
+`--no-sign-request` \
+
+The file was uoploaded to the model folder `07_model`
+`onnxFileName = /project/xu_alfalfabreeding/system_from_home/msi/UG100/07_model/ultimagen-germline-WES-v1.16-ramp.onnx`
+
 aws cli was dowloaded on mac using brew: `brew install awscli`
 
 ### Workflow details
@@ -163,3 +172,20 @@ Now the job was submited to atlas to run asking a gpu-a100 for 72:00:00.
 ### Giraffe
 
 For the next step the goal is to repeat the process but using the phased genome. 
+
+### Postprocess
+
+The last part of the pipeline is to run the post_process step uses the output of call_variants
+`call_variants.1.gz,call_variants.2.gz,..., call_variants.40.gz`
+
+Create the files `called_records.txt` and` gvcf_records.txt`
+/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_make_examples
+
+`called_records=($(ls call_variants.*.gz | sort -V))`
+`printf "%s\n" "${called_records[@]}" > called_records.txt`
+
+`called_gvcf=($(ls *.gvcf.tfrecord.gz | sort -V))`
+`printf "%s\n" "${called_gvcf[@]}" > gvcf_records.txt`
+
+
+
