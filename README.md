@@ -185,7 +185,7 @@ Now the job was submited to atlas to run asking a gpu-a100 for 72:00:00 but the 
 
 The last part of the pipeline was to run the post_process step in the folder `06_make_examples`. This step will require the call_variants output files from `08_call_variants.sh`: `call_variants.1.gz,call_variants.2.gz,..., call_variants.40.gz`. Those files are called from  .txt list: 
 
-Create the .txt list of files `called_records.txt` and` gvcf_records.txt`
+Create the .txt list files `called_records.txt` and` gvcf_records.txt`
 
 `called_records=($(ls call_variants.*.gz | sort -V))` \
 `printf "%s\n" "${called_records[@]}" > called_records.txt` \
