@@ -210,50 +210,12 @@ apptainer run -B /usr/lib/locale/:/usr/lib/locale/ \
 module load python
 module load python_3/3.13.7
 
-Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.api_core past that date.
-
-2026-04-30 13:56:08.764680: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
-
-\--ref is required.
-
-Pass --helpshort or --helpfull to see help on flags.
-
-./test01.sh: line 12: --vcf_stats_report=true: command not found
-
-./test01.sh: line 18: make_examples: command not found
-
-./test01.sh: line 18: --num_shards=1: command not found
-
-\--num_shards
-
-\--make_examples_extra_args
-
-
 
 /project/xu_alfalfabreeding/system_from_home/msi/UG100/03_pipeline/--ref=/project/xu_alfalfabreeding/system_from_home/msi/UG100/03_pipeline/quickstart-testdata/ucsc.hg19.chr20.unittest.fasta: no such file or directory
 
 
 ## works ok
 Run DeepVariant with "--cleanenv"
-
-apptainer run --cleanenv -B /usr/lib/locale/:/usr/lib/locale/ \
- docker://google/deepvariant:"${BIN_VERSION}" \
- /opt/deepvariant/bin/run_deepvariant \
- --model_type=WGS \
- --vcf_stats_report=true \
- --ref="${INPUT_DIR}"/ucsc.hg19.chr20.unittest.fasta \
- --reads="${INPUT_DIR}"/NA12878_S1.chr20.10_10p1mb.bam \
-
-&#x20; --regions "chr20:10,000,000-10,010,000" \\
-
-&#x20; --output_vcf="${OUTPUT_DIR}"/output.vcf.gz \\
-
-&#x20; --output_gvcf="${OUTPUT_DIR}"/output.g.vcf.gz \\
-
-&#x20; --intermediate_results_dir "${OUTPUT_DIR}/intermediate_results_dir" \\ \*\*Optional.
-
-&#x20; --num_shards=1 \\
-
 
 
 #apptainer run -B /usr/lib/locale/:/usr/lib/locale/ \\
@@ -826,9 +788,6 @@ sbatch: error: E.g.: #SBATCH --gres=gpu:<type>:<number-of-GPUS>
 #SBATCH --gres=gpu:1
 #SBATCH --ntasks=16
 
-
-
-
 ERROR call_variants ../cvInferenceMain.cpp:144: Runtime error: parameter exampleFile1 is not defined
 /var/spool/slurmd/job19770911/slurm_script: line 23: 331894 Aborted                 (core dumped) apptainer run --nv call_variants.sif call_variants --param params.ini
 
@@ -872,7 +831,7 @@ BIND_PATH="/project/xu_alfalfabreeding/system_from_home/msi/UG100/06_atlas"
 
 salloc -A xu_alfalfabreeding
 module load apptainer
-vm(INDIV, Ginv1)_
+
 
 apptainer run ${BIND_PATH}/make_examples.sif tool \
   --input ${CRAM} \
@@ -959,42 +918,37 @@ cat: scattered.interval_list: No such file or directory
 
 --progress
 
+REF="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa"
 
 apptainer run make_examples.sif ug_postproc \
-  --infile call_variants.1.gz,call_variants.2.gz,call_variants.3.gz,call_variants.4.gz \
-  --ref Homo_sapiens_assembly38.fasta \
+  --infile \
+  call_variants.1.gz,call_variants.2.gz,call_variants.3.gz,call_variants.4.gz,call_variants.5.gz, \
+  call_variants.6.gz,call_variants.7.gz,call_variants.8.gz,call_variants.9.gz,call_variants.10.gz, \
+  call_variants.11.gz,call_variants.12.gz,call_variants.13.gz,call_variants.14.gz,call_variants.15.gz, \
+  call_variants.16.gz,call_variants.17.gz,call_variants.18.gz,call_variants.19.gz,call_variants.20.gz, \
+  call_variants.21.gz,call_variants.22.gz,call_variants.23.gz,call_variants.24.gz,call_variants.25.gz, \
+  call_variants.26.gz,call_variants.27.gz,call_variants.28.gz,call_variants.29.gz,call_variants.30.gz, \
+  call_variants.31.gz,call_variants.32.gz,call_variants.33.gz,call_variants.34.gz,call_variants.35.gz, \
+  call_variants.36.gz,call_variants.37.gz,call_variants.38.gz,call_variants.39.gz,call_variants.40.gz \
+  --nonvariant_site_tfrecord_path \
+  0001.gvcf.tfrecord.gz,0002.gvcf.tfrecord.gz,0003.gvcf.tfrecord.gz,0004.gvcf.tfrecord.gz,0005.gvcf.tfrecord.gz, \
+  0006.gvcf.tfrecord.gz,0007.gvcf.tfrecord.gz,0008.gvcf.tfrecord.gz,0009.gvcf.tfrecord.gz,0010.gvcf.tfrecord.gz, \
+  0011.gvcf.tfrecord.gz,0012.gvcf.tfrecord.gz,0013.gvcf.tfrecord.gz,0014.gvcf.tfrecord.gz,0015.gvcf.tfrecord.gz, \
+  0016.gvcf.tfrecord.gz,0017.gvcf.tfrecord.gz,0018.gvcf.tfrecord.gz,0019.gvcf.tfrecord.gz,0020.gvcf.tfrecord.gz, \
+  0021.gvcf.tfrecord.gz,0022.gvcf.tfrecord.gz,0023.gvcf.tfrecord.gz,0024.gvcf.tfrecord.gz,0025.gvcf.tfrecord.gz, \
+  0026.gvcf.tfrecord.gz,0027.gvcf.tfrecord.gz,0028.gvcf.tfrecord.gz,0029.gvcf.tfrecord.gz,0030.gvcf.tfrecord.gz, \
+  0031.gvcf.tfrecord.gz,0032.gvcf.tfrecord.gz,0033.gvcf.tfrecord.gz,0034.gvcf.tfrecord.gz,0035.gvcf.tfrecord.gz, \
+  0036.gvcf.tfrecord.gz,0037.gvcf.tfrecord.gz,0038.gvcf.tfrecord.gz,0039.gvcf.tfrecord.gz,0040.gvcf.tfrecord.gz \
+  --ref ${REF} \
   --outfile output_prefix.vcf.gz \
+  --gvcf_outfile output_prefix.g.vcf.gz \
   --consider_strand_bias \
   --flow_order TGCA \
-  --bed_annotation_files exome.twist.bed,ug_hcr.bed,... \
   --qual_filter 1 \
-  --gvcf_outfile output_prefix.g.vcf.gz
-  --nonvariant_site_tfrecord_path 
-  0001.gvcf.tfrecord.gz,0002.gvcf.tfrecord.gz,0003.gvcf.tfrecord.gz,0004.gvcf.tfrecord.gz,0005.gvcf.tfrecord.gz,
-  0006.gvcf.tfrecord.gz,0007.gvcf.tfrecord.gz,0008.gvcf.tfrecord.gz,0009.gvcf.tfrecord.gz,0010.gvcf.tfrecord.gz,
-  0011.gvcf.tfrecord.gz,0012.gvcf.tfrecord.gz,0013.gvcf.tfrecord.gz,0014.gvcf.tfrecord.gz,0015.gvcf.tfrecord.gz,
-  0016.gvcf.tfrecord.gz,0017.gvcf.tfrecord.gz,0018.gvcf.tfrecord.gz,0019.gvcf.tfrecord.gz,0020.gvcf.tfrecord.gz,
-  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
-  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
-  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
-  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
-  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
-  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
-  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
-  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
-  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
-  0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,0001.gvcf.tfrecord.gz,
-
-
-  --vcf_stats_report
-  --use_multiallelic_model
-
-  gvcf.tfrecord.gz 
-
-  --nonvariant_site_tfrecord_path
-
+  --vcf_stats_report \
+  --use_multiallelic_model \
   --gq-resolution
-  --gq-thresholds
+
 
 
 
