@@ -162,16 +162,14 @@ The last step for make_examples is to run the script [06_make.sh](https://github
 
 ### Running call_variants
 
-To run call_variants, the tfrecord files were moved from ceres to atlas as well as the files [params.ini]<https://github.com/cculma/UG100/blob/main/05_UG_scripts/params.ini> and the batch script to run it [08_call_variants.sh]<https://github.com/cculma/UG100/blob/main/05_UG_scripts/08_call_variants.sh>
+To run call_variants, the tfrecord files were moved from ceres to atlas as well as the files [params.ini](https://github.com/cculma/UG100/blob/main/05_UG_scripts/params.ini) and the batch script to run it [08_call_variants.sh](https://github.com/cculma/UG100/blob/main/05_UG_scripts/08_call_variants.sh)
 
-The batch script `07_call_variants.sh` requered to be modified because it contains contains DOS line breaks:
-`tr -d '\r' < 07_call_variants.sh > 08_call_variants.sh`
+**Some notes to make it work**
+The batch script `07_call_variants.sh` requered to be modified because it contains contains DOS line breaks: `tr -d '\r' < 07_call_variants.sh > 08_call_variants.sh`
 
 Now the job was submited to atlas to run asking a gpu-a100 for 72:00:00.
 
-The folder that works was `06_make_examples` which was transfered from ceres to atlas to run the script `08_call_variants.sh` which requires the file `params.ini`
-
-
+The folder that worked was `06_make_examples` which was transfered from ceres to atlas to run the script `08_call_variants.sh` which requires the file `params.ini`
 
 ### Giraffe
 
@@ -191,5 +189,6 @@ Create the files `called_records.txt` and` gvcf_records.txt`
 `called_gvcf=($(ls *.gvcf.tfrecord.gz | sort -V))`
 `printf "%s\n" "${called_gvcf[@]}" > gvcf_records.txt`
 
+The post_process step requires the files [08_postproc.sh](https://github.com/cculma/UG100/blob/main/05_UG_scripts/08_postproc.sh) and the sbatch file [job_08_postproc.sh](https://github.com/cculma/UG100/blob/main/05_UG_scripts/job_08_postproc.sh)
 
 
