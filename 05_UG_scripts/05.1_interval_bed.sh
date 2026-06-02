@@ -14,7 +14,7 @@ java -jar $PICARD IntervalListTools \
   SORT=true \
   BREAK_BANDS_AT_MULTIPLES_OF=10000000 \
   INPUT=haplo_01.interval_list \
-  OUTPUT=out01
+  OUTPUT=out02
 
 mkdir out_bed02
 # mk dir to put all interval.bed files (40 files)

@@ -167,19 +167,19 @@ To run call_variants, the tfrecord files were moved from ceres to atlas as well 
 **Some notes to make it work** \
 The batch script `07_call_variants.sh` requered to be modified because it contains contains DOS line breaks: `tr -d '\r' < 07_call_variants.sh > 08_call_variants.sh`
 
+**Important** the output files from `06_make.sh` include chunks from 0001 to 0040 and outputs for each part of the genome include the files: \
+`0001.gvcf.tfrecord.gz` \
+`0001.tfrecord.gz` \
+`0001_hap_out.json` \
+`0001_hap_out.sam` \
+`0001_medsa.RegenSY27x.gnm1.Chr1.1.gatk` \
+`0001_medsa.RegenSY27x.gnm1.Chr1.1.json` \
+
+In the intersections between chromosomes is expected to have two gatk and json files (Chr1.1.gatk and Chr2.1.gatk) but sometimes the script stop to make examples in the former chromosome. This was fixed in the  `$PICARD IntervalListTools` increasing the band size `BREAK_BANDS_AT_MULTIPLES_OF` from 1000 to 10000000
+
 The folder that worked was `06_make_examples` which was transfered from ceres to atlas to run the script `08_call_variants.sh` which requires the file `params.ini`
 
 Now the job was submited to atlas to run asking a gpu-a100 for 72:00:00 but the time required was 06:00:00.
-
-**Important** the output files from `06_make.sh` include chunks from 0001 to 0040 and outputs for each part of the genome include the files: \
-0001.gvcf.tfrecord.gz
-0001.tfrecord.gz
-0001_hap_out.json
-0001_hap_out.sam
-0001_medsa.RegenSY27x.gnm1.Chr1.1.gatk
-0001_medsa.RegenSY27x.gnm1.Chr1.1.json
-
-In the inster
 
 ### Postprocess
 
