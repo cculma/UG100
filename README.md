@@ -169,6 +169,10 @@ The batch script `07_call_variants.sh` requered to be modified because it contai
 
 Now the job was submited to atlas to run asking a gpu-a100 for 72:00:00.
 
+The folder that works was `06_make_examples` which was transfered from ceres to atlas to run the script `08_call_variants.sh` which requires the file `params.ini`
+
+
+
 ### Giraffe
 
 For the next step the goal is to repeat the process but using the phased genome. 
