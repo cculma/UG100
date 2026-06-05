@@ -201,4 +201,4 @@ For the next step the goal is to repeat the process but using the phased genome.
 
 ### Competitive aligment
 
-The refernece genome is already phased 
+The refernece genome is already phased, the most direct method is to trat the four haplotypes as distinct chromosomes during aligment. Align the four haplotype reference genome (32 LD groups) using the same pipeline and comapre the results. 
