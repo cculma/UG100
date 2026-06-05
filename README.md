@@ -198,3 +198,7 @@ The post_process was run using the [08_postproc.sh](https://github.com/cculma/UG
 ### Giraffe
 
 For the next step the goal is to repeat the process but using the phased genome. 
+
+### Competitive aligment
+
+The refernece genome is already phased 
