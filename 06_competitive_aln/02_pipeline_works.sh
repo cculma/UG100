@@ -30,11 +30,16 @@ apptainer run ${BIND_PATH}/alignment.sif ua \
     --seed-score-ratio 0.5 --vector --soft-clipping | \
 samtools view -@ 32 -o $OUT_DIR/output_basename.bam -
 
+java -jar $PICARD CollectWgsMetrics \
+  I=$OUT_DIR/output_basename.bam \
+  O=collect_wgs_metrics.txt \
+  R=${REF}
+
 # Step 3 : Sort UA Aligned BAM with Demux and Sorter
 # The 'demux' tool prepares the BAM for the sorter. 
 # Use --channel-id=0 to prevent the 'fail to scan' error you encountered.
 samtools view -h -@ 32 $OUT_DIR/output_basename.bam | \
-apptainer run sorter.sif demux \
+apptainer run ${BIND_PATH}/sorter.sif demux \
     --input=- \
     --output-dir=$OUT_DIR/ \
     --runid=output_basename \
@@ -58,7 +63,4 @@ apptainer run ${BIND_PATH}/sorter.sif sorter \
     --progress \
     --timestamp=000  # Used to override sorter output timestamp
 
-java -jar $PICARD CollectWgsMetrics \
-  I=$OUT_DIR/output_basename.bam \
-  O=collect_wgs_metrics.txt \
-  R=${REF}
+
