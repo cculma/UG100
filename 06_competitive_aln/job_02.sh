@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name="UG01"   #name of this job
+#SBATCH --job-name="UG02"   #name of this job
 #SBATCH -p ceres              #name of the partition (queue) you are submitting to
 #SBATCH -N 1                  #number of nodes in this job
 #SBATCH -n 80                 #number of cores/tasks in this job, you get all 20 physical cores with 2 threads per core with hyper-threading
