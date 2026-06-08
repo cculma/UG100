@@ -17,11 +17,19 @@ module load samtools
 # cd /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_04/
 samtools faidx $REF
 samtools dict $REF -o ${REF%.fa}.dict
-awk 'BEGIN {FS="\t"}; {print $1 FS "0" FS $2}' $fasta.fai > ${REF%.fa}.bed
+awk 'BEGIN {FS="\t"}; {print $1 FS "0" FS $2}' ${REF}.fai > ${REF}.bed
+
+
+#samtools faidx $REF
+#samtools dict $REF -o ${REF%.fa}.dict
+
+# fai to bed
+awk 'BEGIN {FS="\t"}; {print $1 FS "0" FS $2}' ${REF}.fai > ${REF}.bed
+
 
 # works ok
 java -jar $PICARD BedToIntervalList \
-    -I ${REF%.fa}.bed \
+    -I ${REF}.bed \
     -O ${REF%.fa}.interval_list \
     -SD ${REF%.fa}.dict
 
