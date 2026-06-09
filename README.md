@@ -40,7 +40,7 @@ Sample S18-NGX will be aligned to the RegenSY27x genome. This genome is phased a
 | medsa.RegenSY27x.gnm1.Chr7.1 | 7     | 79053817  | 87713645  | 88635038  | 96423042   |
 | medsa.RegenSY27x.gnm1.Chr8.1 | 8     | 76300915  | 70660710  | 74845475  | 86071966   |
 | Sub-Total                    |       | 653415314 | 625696371 | 648084291 | 667322748  |
-| Total                        |       |           |           |           | 2594518724 |
+| Total (Phased_1:4)           |       |           |           |           | 2594518724 |
 
 ### Two approaches will be tested
 
