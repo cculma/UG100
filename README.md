@@ -202,3 +202,12 @@ For the next step the goal is to repeat the process but using the phased genome.
 ### Competitive aligment
 
 The refernece genome is already phased, the most direct method is to trat the four haplotypes as distinct chromosomes during aligment. Align the four haplotype reference genome (32 LD groups) using the same pipeline and comapre the results. 
+
+### Comparison of aligment
+
+Aligment of monoploid genome (.1) vs phased genome (32 LG) was achieved using `picard.analysis.WgsMetrics`:
+
+| RegenSY27  | GENOME_TERRITORY | PCT_EXC_MAPQ | PCT_EXC_UNPAIRED | Total |
+|------------|------------------|--------------|------------------|-------|
+| Haplo_1    | 653356514        | 0.375        | 0.625            | 1.000 |
+| Phased_1:4 | 2594267024       | 0.628        | 0.372            | 1.000 |
