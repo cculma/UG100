@@ -203,6 +203,9 @@ For the next step the goal is to repeat the process but using the phased genome.
 
 The refernece genome is already phased, the most direct method is to trat the four haplotypes as distinct chromosomes during aligment. Align the four haplotype reference genome (32 LD groups) using the same pipeline and comapre the results. 
 
+This process was similar to the haplo_01 pipeline. The scripts are located in the folder [06_competitive_aln](https://github.com/cculma/UG100/tree/main/06_competitive_aln) in the order described: `01_pull.sh`
+ (already done), `02_pipeline_works.sh`, `03_interval_bed.sh`, `04_make.sh`. Then the output files from `04_make.sh` needs to be moved form ceres to atlas to run the call_variants and post_process steps.
+
 ### Comparison of aligment
 
 Aligment of monoploid genome (.1) vs phased genome (32 LG) was achieved using `picard.analysis.WgsMetrics`:
