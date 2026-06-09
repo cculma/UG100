@@ -6,7 +6,6 @@ INPUT_CRAM="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/42
 REF="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_04/haplo_01_04.fa"
 OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/07_output"
 BIND_PATH="/project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts"
-BIND_PATH="/project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts"
 PICARD="/software/el9/apps/picard/3.0.0/picard.jar"
 
 # Step 1: Indexing
