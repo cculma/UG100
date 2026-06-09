@@ -11,8 +11,7 @@ CRAM="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/07_output/output_
 CRAI="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/07_output/output_basename-000/output_basename/output_basename.cram.crai"
 OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/07_make_examples"
 
-
-# for loop to run make_examples.sif for each bed file generated from 05.1_interval_bed.sh
+# for loop to run make_examples.sif for each bed file generated from 03_interval_bed.sh
 # option `--median-coverage <median_coverage> \` was not recognized. It is not present in this version of make_examples.sif
 # GVCF: Add the arguments --gvcf and --p-error 0.005 to the make_examples step. L42
 
@@ -28,7 +27,7 @@ result=${temp%_of*}
 apptainer run ${BIND_PATH}/make_examples.sif tool \
   --input ${CRAM} \
   --cram-index ${CRAI} \
-  --bed BED_DIR/${i} \
+  --bed ${i} \
   --output ${OUT_DIR}/${result} \
   --reference ${REF} \
   --min-base-quality 5 \
