@@ -31,9 +31,3 @@ apptainer pull alignment.sif docker://ultimagenomics/alignment:4.0
 
 # Pull the filtering
 apptainer pull ugbio_filtering.sif docker://ultimagenomics/ugbio_filtering:1.22.0
-
-
-# java -jar picard.jar CollectWgsMetrics \
-#        I=input.bam \
-#        O=collect_wgs_metrics.txt \
-#        R=reference_sequence.fasta 
