@@ -133,79 +133,7 @@ apptainer inspect --runscript deepvariant_1.10.0.sif
 
 
 
-# Run DeepVariant.
-
-apptainer run -B /usr/lib/locale/:/usr/lib/locale/ \\
-
-&#x20; docker://google/deepvariant:"${BIN_VERSION}" \\
-
-&#x20; /opt/deepvariant/bin/run_deepvariant \\
-
-&#x20; --model_type=WGS \\ \*\*Replace this string with exactly one of the following \[WGS,WES,PACBIO,ONT_R104,HYBRID_PACBIO_ILLUMINA]\*\*
-
-&#x20; --vcf_stats_report=true \\
-
-&#x20; --ref="${INPUT_DIR}"/ucsc.hg19.chr20.unittest.fasta \\
-
-&#x20; --reads="${INPUT_DIR}"/NA12878_S1.chr20.10_10p1mb.bam \\
-
-&#x20; --regions "chr20:10,000,000-10,010,000" \\
-
-&#x20; --output_vcf="${OUTPUT_DIR}"/output.vcf.gz \\
-
-&#x20; --output_gvcf="${OUTPUT_DIR}"/output.g.vcf.gz \\
-
-&#x20; --intermediate_results_dir "${OUTPUT_DIR}/intermediate_results_dir" \\ \*\*Optional.
-
-&#x20; --num_shards=2 \\ \*\*How many cores the `make_examples` step uses. Change it to the number of CPU cores you have.\*\*
-
-INPUT_DIR="${PWD}/quickstart-testdata"
-
-OUTPUT_DIR="${PWD}/quickstart-output"
-
-mkdir -p "${OUTPUT_DIR}"
-
-
-
 apptainer run deepvariant_1.10.0.sif -v "${INPUT_DIR}":"/input" -v "${OUTPUT_DIR}":"/output" --model_type=WGS --vcf_stats_report=true --ref="${INPUT_DIR}"/ucsc.hg19.chr20.unittest.fasta --reads="${INPUT_DIR}"/NA12878_S1.chr20.10_10p1mb.bam --regions "chr20:10,000,000-10,010,000" --output_vcf="${OUTPUT_DIR}"/output.vcf.gz --output_gvcf="${OUTPUT_DIR}"/output.g.vcf.gz --intermediate_results_dir "${OUTPUT_DIR}/intermediate_results_dir" --num_shards=2
-
-export APPTAINER_CACHEDIR=$TMPDIR \\
-
-export APPTAINER_TMPDIR=$TMPDIR \\
-
-
-
-INPUT_DIR="${PWD}/quickstart-testdata"
-
-OUTPUT_DIR="${PWD}/quickstart-output"
-
-BIN_VERSION="1.10.0"
-
-apptainer run -B /usr/lib/locale/:/usr/lib/locale/ \
-
-&#x20; docker://google/deepvariant:"${BIN_VERSION}" \
-
-&#x20; /opt/deepvariant/bin/run_deepvariant \
-
-&#x20; --model_type=WGS \\ \*\*Replace this string with exactly one of the following \[WGS,WES,PACBIO,ONT_R104,HYBRID_PACBIO_ILLUMINA]\*\*
-
-&#x20; --vcf_stats_report=true \\
-
-&#x20; --ref="${INPUT_DIR}"/ucsc.hg19.chr20.unittest.fasta \\
-
-&#x20; --reads="${INPUT_DIR}"/NA12878_S1.chr20.10_10p1mb.bam \\
-
-&#x20; --regions "chr20:10,000,000-10,010,000" \\
-
-&#x20; --output_vcf="${OUTPUT_DIR}"/output.vcf.gz \\
-
-&#x20; --output_gvcf="${OUTPUT_DIR}"/output.g.vcf.gz \\
-
-&#x20; --intermediate_results_dir "${OUTPUT_DIR}/intermediate_results_dir" \\ \*\*Optional.
-
-&#x20; --num_shards=1 \\ \*\*How many cores the `make_examples` step uses. Change it to the number of CPU cores you have.\*\*
-
-
 
 module load python
 module load python_3/3.13.7
@@ -248,7 +176,6 @@ quickstart-output
 \--model_type: <WGS|WES|PACBIO|ONT_R104|HYBRID_PACBIO_ILLUMINA|MASSEQ|RNASEQ>: Required. Type of model to use for variant calling. Set this flag to use the default model
 
 
-
 docker pull ultimagenomics/ugbio_filtering:1.22.0
 apptainer pull ultimagenomics/alignment:4.0
 apptainer pull alpine.sif docker://alpine:latest
@@ -270,7 +197,6 @@ GENOME=/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_0
 #SBATCH --mem=64G
 #SBATCH --partition=gpu  # DeepVariant is much faster on a GPU node
 #SBATCH --gres=gpu:1     # Request 1 GPU
-
 
 module load apptainer
 
