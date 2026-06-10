@@ -875,12 +875,21 @@ apptainer run make_examples.sif ug_postproc \
   --use_multiallelic_model \
   --gq-resolution
 
+salloc -A xu_alfalfabreeding
+module load apptainer
+BIND_PATH="/project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts"
 
+apptainer run ${BIND_PATH}/make_examples.sif tool \
 
+salloc -A xu_alfalfabreeding
+module load apptainer
 
+apptainer run ${BIND_PATH}/alignment.sif ua --help
+apptainer run ${BIND_PATH}/sorter.sif demux --help
+apptainer run ${BIND_PATH}/sorter.sif sorter --help
 apptainer run make_examples.sif ug_postproc --help
 
-
+998463718
 
 ug_postproc \
   --infile call_variants.1.gz,call_variants.2.gz,... \
