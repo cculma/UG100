@@ -143,14 +143,14 @@ The workflow takes three major inputs:
 Running the `params.ini` it is necessary to get the `onnx` model.
 
 Could not open file gs://concordanz/deepvariant/model/germline/v1.14/germline-ramp-8128462_shuffle_300K_ckpt_260000.onnx
-Following the previous [issue]<https://github.com/Ultimagen/healthomics-workflows/issues/27>, the command to get the model is:
+Following the previous [issue](https://github.com/Ultimagen/healthomics-workflows/issues/27), the command to get the model is:
 
 `mkdir model`\
 `aws s3 cp` \
 `s3://ultimagen-workflow-resources-us-east-1/deepvariant/model/germline/v1.3/model.ckpt-890000.dyn_1500.onnx model/` \
 `--no-sign-request` \
 
-the germline onnx file link was found in the efficient dv [template]<https://github.com/Ultimagen/healthomics-workflows/blob/main/workflows/efficient_dv/input_templates/efficient_dv_template-WES-germline-v1_16-ramp.json>
+the germline onnx file link was found in the efficient dv [template](https://github.com/Ultimagen/healthomics-workflows/blob/main/workflows/efficient_dv/input_templates/efficient_dv_template-WES-germline-v1_16-ramp.json)
 
 `aws s3 cp` \
 `s3://ultimagen-workflow-resources-us-east-1/deepvariant/model/germline/wes/v1.16/ultimagen-germline-WES-v1.16-ramp.onnx` \
@@ -190,11 +190,11 @@ The batch script `07_call_variants.sh` requered to be modified because it contai
 `0001_medsa.RegenSY27x.gnm1.Chr1.1.gatk` \
 `0001_medsa.RegenSY27x.gnm1.Chr1.1.json` \
 
-In the intersections between chromosomes is expected to have two gatk and json files (Chr1.1.gatk and Chr2.1.gatk) but sometimes the script stop to make examples in the former chromosome. This was fixed in the  `$PICARD IntervalListTools` increasing the band size `BREAK_BANDS_AT_MULTIPLES_OF` from 1000 to 10000000
+In the intersection between chromosomes is expected to have two gatk and json files (Chr1.1.gatk and Chr2.1.gatk) but sometimes the script stop to make examples in the former chromosome. This was fixed in the  `$PICARD IntervalListTools` increasing the band size `BREAK_BANDS_AT_MULTIPLES_OF` from 1000 to 10000000
 
 The folder that worked was `06_make_examples` which was transfered from ceres to atlas to run the script `08_call_variants.sh` which requires the file `params.ini`
 
-Now the job was submited to atlas to run asking a gpu-a100 for 72:00:00 but the time required was 06:00:00.
+Now the job was submitted to atlas to run asking a gpu-a100 for 72:00:00 but the time required was 06:00:00.
 
 ### Postprocess
 
@@ -214,16 +214,16 @@ The post_process was run using the [08_postproc.sh](https://github.com/cculma/UG
 
 For the next step the goal is to repeat the process but using the phased genome. 
 
-### Competitive aligment
+### Competitive alignment
 
-The refernece genome is already phased, the most direct method is to trat the four haplotypes as distinct chromosomes during aligment. Align the four haplotype reference genome (32 LD groups) using the same pipeline and comapre the results. 
+The reference genome is already phased; the most direct method is to trat the four haplotypes as distinct chromosomes during alignment. Align the four-haplotype reference genome (32 LD groups) using the same pipeline and compare the results. 
 
 This process was similar to the haplo_01 pipeline. The scripts are located in the folder [06_competitive_aln](https://github.com/cculma/UG100/tree/main/06_competitive_aln) in the order described: `01_pull.sh`
  (already done), `02_pipeline_works.sh`, `03_interval_bed.sh`, `04_make.sh`. Then the output files from `04_make.sh` needs to be moved form ceres to atlas to run the call_variants and post_process steps.
 
-### Comparison of aligment
+### Comparison of alignment 
 
-Aligment of monoploid genome (.1) vs phased genome (32 LG) was achieved using `picard.analysis.WgsMetrics`:
+Alignment  of monoploid genome (.1) vs phased genome (32 LG) was achieved using `picard.analysis.WgsMetrics`:
 
 | RegenSY27  | GENOME_TERRITORY | PCT_EXC_MAPQ | PCT_EXC_UNPAIRED | Total |
 |------------|------------------|--------------|------------------|-------|
