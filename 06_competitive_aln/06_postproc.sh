@@ -20,6 +20,7 @@ CRAM="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/07_output/output_
 CRAI="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/07_output/output_basename-000/output_basename/output_basename.cram.crai"
 OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/07_make_examples"
 
+# Create the .txt list files `called_records.txt` and` gvcf_records.txt`
 
 called_records=($(ls call_variants.*.gz | sort -V)) \
 printf "%s\n" "${called_records[@]}" > called_records.txt \
