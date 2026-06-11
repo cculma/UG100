@@ -61,5 +61,3 @@ apptainer run ${BIND_PATH}/sorter.sif sorter \
     --nthreads 32 \
     --progress \
     --timestamp=000  # Used to override sorter output timestamp
-
-
