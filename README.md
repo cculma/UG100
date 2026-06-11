@@ -4,9 +4,9 @@ The objective of this project is to generate a genomic VCF (gVCF) for the genoty
 
 UG100 present challenges regarding homopolymers and a rigorous quality control is necessary at every step of the pipeline.
 
-## progress 2026-05-01
+## Preliminary analysis
 
-1.1 Preliminary analysis. A preliminary review of the UMNGC report was conducted for pool 1 (samples 1 to 11) and pool 2 (samples 12 to 22).
+1.1 A preliminary review of the UMNGC report was conducted for UG100 pool 1 (samples 1 to 11) and pool 2 (samples 12 to 22).
 
 | ID | Sample        | Mean_Read | Mean_Q | Q30_FLOWS | Q40_SNVQ | total_bases   | total_reads | reads_billion |
 |----|---------------|-----------|--------|-----------|----------|---------------|-------------|---------------|
@@ -44,18 +44,18 @@ UG100 present challenges regarding homopolymers and a rigorous quality control i
 
 Sample S18-NGX will be aligned to the RegenSY27x genome. This genome is phased and contains 32 linkage groups (LG), representing eight chromosomes across four monoploid genomes. Given a genome size of 653 Mb for Hap_01, the coverage is $455\times$. For the full phased genome (32 LG) of 2.59 Gb, the coverage is $114\times$.
 
-| chrom                        | Chrom | Hap_1     | Hap_2     | Hap_3     | Hap_4      |
-|------------------------------|-------|-----------|-----------|-----------|------------|
-| medsa.RegenSY27x.gnm1.Chr1.1 | 1     | 85129743  | 87534413  | 86698797  | 81593309   |
-| medsa.RegenSY27x.gnm1.Chr2.1 | 2     | 69581426  | 69606329  | 75653446  | 72621877   |
-| medsa.RegenSY27x.gnm1.Chr3.1 | 3     | 96190425  | 90827970  | 91408138  | 83189900   |
-| medsa.RegenSY27x.gnm1.Chr4.1 | 4     | 83716887  | 83291558  | 86231604  | 92808212   |
-| medsa.RegenSY27x.gnm1.Chr5.1 | 5     | 79699470  | 62554310  | 75148351  | 71615600   |
-| medsa.RegenSY27x.gnm1.Chr6.1 | 6     | 83742631  | 73507436  | 69463442  | 82998842   |
-| medsa.RegenSY27x.gnm1.Chr7.1 | 7     | 79053817  | 87713645  | 88635038  | 96423042   |
-| medsa.RegenSY27x.gnm1.Chr8.1 | 8     | 76300915  | 70660710  | 74845475  | 86071966   |
-| Sub-Total                    |       | 653415314 | 625696371 | 648084291 | 667322748  |
-| Total (Phased_1:4)           |       |           |           |           | 2594518724 |
+| Genome                | Chr | Chr_.1   | Chr_.2   | Chr_.3   | Chr_.4   |
+|-----------------------|-----|----------|----------|----------|----------|
+| medsa.RegenSY27x.gnm1 | 1   | 85129743 | 87534413 | 86698797 | 81593309 |
+| medsa.RegenSY27x.gnm1 | 2   | 69581426 | 69606329 | 75653446 | 72621877 |
+| medsa.RegenSY27x.gnm1 | 3   | 96190425 | 90827970 | 91408138 | 83189900 |
+| medsa.RegenSY27x.gnm1 | 4   | 83716887 | 83291558 | 86231604 | 92808212 |
+| medsa.RegenSY27x.gnm1 | 5   | 79699470 | 62554310 | 75148351 | 71615600 |
+| medsa.RegenSY27x.gnm1 | 6   | 83742631 | 73507436 | 69463442 | 82998842 |
+| medsa.RegenSY27x.gnm1 | 7   | 79053817 | 87713645 | 88635038 | 96423042 |
+| medsa.RegenSY27x.gnm1 | 8   | 76300915 | 70660710 | 74845475 | 86071966 |
+| Sub-Total             |     | 6.53E+08 | 6.26E+08 | 6.48E+08 | 6.67E+08 |
+| Total (Phased_1:4)    |     |          |          |          | 2.59E+09 |
 
 ### Two approaches will be tested
 
@@ -106,9 +106,9 @@ Progress: The reference genome was indexed successfully. Steps 1.1 (UA indexing)
 
 Task for the next week: I need to solve a problem with GPU hardware compatibility. GPU will be required in the step 4 (Varaint calling with DeepVariant). Ceres cluster does not have GPUs, but Atlas does it. Therefore, all data generated on Ceres must be synchronized to Atlas via Globus. Furthermore, the Apptainer images from <https://hub.docker.com/u/ultimagenomics> are not functioning correctly on the Atlas cluster; I will write to SCinet to solve it.
 
-## progress 2026-05-08
+## CRAM trimming  and sorting
 
-The pipeline for triming and sorting was corrected and now works ok: the script is [04_pipeline_works.sh](https://github.com/cculma/UG100/blob/main/05_UG_scripts/04_pipeline_works.sh). This pipeline is composed of three steps:
+The pipeline for trimming and sorting was corrected and now works ok: the script is [04_pipeline_works.sh](https://github.com/cculma/UG100/blob/main/05_UG_scripts/04_pipeline_works.sh). This pipeline is composed of three steps:
 
 1. Reference indexing
 2. Align with UA
@@ -138,7 +138,7 @@ The workflow takes three major inputs:
 `haplo_01.interval_list` \
 3. A model checkpoint in ONNX format. **where to get it?**
 
-### Note about the onnx model
+### About the onnx model
 
 Running the `params.ini` it is necessary to get the `onnx` model.
 
@@ -156,12 +156,12 @@ the germline onnx file link was found in the efficient dv [template](https://git
 `s3://ultimagen-workflow-resources-us-east-1/deepvariant/model/germline/wes/v1.16/ultimagen-germline-WES-v1.16-ramp.onnx` \
 `--no-sign-request` \
 
-The file was uoploaded to the model folder `07_model`
+The file was uploaded to the model folder `07_model`
 `onnxFileName = /project/xu_alfalfabreeding/system_from_home/msi/UG100/07_model/ultimagen-germline-WES-v1.16-ramp.onnx`
 
 aws cli was dowloaded on mac using brew: `brew install awscli`
 
-### Workflow details
+## Workflow details
 
 The workflow is composed of three steps: 
 
@@ -169,7 +169,7 @@ The workflow is composed of three steps:
 2. call_variants
 3. post_process
 
-During the step make_examples there is necesary to generate an `${REF%.fa}.interval_list` file with the script [05_interval_list.sh](https://github.com/cculma/UG100/blob/main/05_UG_scripts/05_interval_list.sh). The output of this script will be required for the next step during the make_examples step.
+During the step make_examples there is necessary to generate an `${REF%.fa}.interval_list` file with the script [05_interval_list.sh](https://github.com/cculma/UG100/blob/main/05_UG_scripts/05_interval_list.sh). The output of this script will be required for the next step during the make_examples step.
 
 The script [05.1_interval_bed.sh](https://github.com/cculma/UG100/blob/main/05_UG_scripts/05.1_interval_bed.sh) create a $N$ interval list with function `IntervalListTools ` from `PICARD` and convert the interval list files into `.bed`. 
 
