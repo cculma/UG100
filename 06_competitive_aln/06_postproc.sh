@@ -1,15 +1,6 @@
 #!/bin/bash
 
 # Define Paths
-REF="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa"
-BIND_PATH="/project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts"
-CRAM="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_basename-000/output_basename/output_basename.cram"
-CRAI="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output/output_basename-000/output_basename/output_basename.cram.crai"
-OUT_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_make_examples"
-FAI="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa"
-
-
-
 
 REF="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_04/haplo_01_04.fa"
 BED_DIR="/90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_04/out_bed02"
@@ -40,6 +31,5 @@ apptainer run ${BIND_PATH}/make_examples.sif ug_postproc \
   --vcf_stats_report \
 
 #  --use_multiallelic_model \
-
 
 
