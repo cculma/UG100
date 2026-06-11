@@ -122,7 +122,7 @@ The next steps are: \
 4. Prepare Reference for Variant Calling <https://github.com/Ultimagen/healthomics-workflows/blob/main/workflows/efficient_dv/howto-custom-reference-genome.md> \
 5. Variant calling <https://github.com/Ultimagen/healthomics-workflows/blob/main/workflows/efficient_dv/howto-germline-calling-efficient-dv.md>
 
-The expected output is a gVCF with both variant and non-variant sites alligned to the monoploid reference genome. 
+The expected output is a gVCF with both variant and non-variant sites aligned to the monoploid reference genome. 
 
 ### Input files for calling variants
 
