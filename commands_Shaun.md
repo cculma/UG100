@@ -325,8 +325,6 @@ apptainer pull make_examples.sif docker://ultimagenomics/make_examples:latest
 
 /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/haplo_01.fa.uai
 
-
-
 ./03_apptainer_aligment.sh: line 16: /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/06_output//90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/421685-S18-NGX-Z0018-CATGCGTCCTGTGAT.cram.sa
 
 
@@ -413,8 +411,6 @@ samtools dict haplo_01.fa >  haplo_01.fa.dict
 /project/xu_alfalfabreeding/system_from_home/msi/UG100/05_UG_scripts/
 /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/
 /90daydata/xu_alfalfabreeding/system_from_home/msi/UG100/02_files/haplo_01_mem2/
-
-
 
 ### does not work
 apptainer run call_variants.sif ls -R /model/germline/v1.14/
